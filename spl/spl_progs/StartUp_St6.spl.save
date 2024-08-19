@@ -1,0 +1,17 @@
+print "Start"
+//INIT
+loadi(65,7);
+loadi(66,8);
+//INT 10
+loadi(22,35);
+loadi(23,36);
+//Exp handler
+loadi(2,15);
+loadi(3,16);
+print "Loaded"
+//Page Table
+PTBR= PAGE_TABLE_BASE;
+PTLR= 3;
+[PTBR+0] = 65;
+[PTBR+1] = ""
+

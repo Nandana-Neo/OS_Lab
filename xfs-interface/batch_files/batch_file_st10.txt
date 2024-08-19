@@ -1,0 +1,4 @@
+load --os $HOME/myexpos/spl/spl_progs/StartUp_St10.xsm
+load --int=7 $HOME/myexpos/spl/spl_progs/sample_int7.xsm
+load --init $HOME/myexpos/expl/expl_progs/natural_st10.xsm
+exit
