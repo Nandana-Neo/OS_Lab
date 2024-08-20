@@ -1,6 +1,7 @@
 load --library $HOME/myexpos/expl/library.lib
-load --os $HOME/myexpos/spl/spl_progs/StartUp_St10.xsm
+load --os $HOME/myexpos/spl/spl_progs/StartUp_St12.xsm
 load --int=7 $HOME/myexpos/spl/spl_progs/sample_int7.xsm
 load --init $HOME/myexpos/expl/samples/numbers.xsm
 load --idle $HOME/myexpos/expl/samples/idle_st12.xsm
+load --int=timer $HOME/myexpos/spl/spl_progs/sample_timer_12.xsm
 exit
