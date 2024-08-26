@@ -1,0 +1,15 @@
+int main()
+{
+	decl
+	int x,num;
+	enddecl
+
+	begin
+	x=2;
+	while(x<=100) do
+		num = exposcall("Write",-2,x);
+		x= x+2;
+	endwhile;
+	return 0;
+	end
+}
