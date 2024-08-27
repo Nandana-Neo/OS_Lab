@@ -1,0 +1,46 @@
+decl
+int prime(int num);
+enddecl
+
+int prime(int num)
+{
+decl
+        int x,ret;
+enddecl
+begin   
+        x=2;
+        ret=1;
+        if((num==1) OR (num==0)) then
+                ret = 0;
+        endif;
+        while(x<num) do
+                if((num % x) == 0) then
+                        ret= 0;
+                        break;
+                endif;
+                x=x+1;
+        endwhile;
+        
+        return ret;
+end
+
+}
+
+
+int main()
+{
+decl
+	int num,p;
+enddecl
+begin
+	num = 1;
+	while(num < 100) do
+		p = prime(num);
+		if(p==1) then 
+			p=exposcall("Write",-2,num);	
+		endif;
+		num = num+1;
+	endwhile;
+	return 0;
+end
+}
