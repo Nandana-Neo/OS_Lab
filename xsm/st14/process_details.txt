@@ -1,0 +1,82 @@
+debug> sst
+Current User ID: 
+Current PID: 2
+Memory Free Count: 
+Wait Memory Count: 
+Swapped Count: 
+Paging Status: 
+
+debug> pt
+VIRT: 0		PHY: 63		AUX: 0100	
+VIRT: 1		PHY: 64		AUX: 0100	
+VIRT: 2		PHY: 86		AUX: 0110	
+VIRT: 3		PHY: 87		AUX: 0110	
+VIRT: 4		PHY: 83		AUX: 0100	
+VIRT: 5		PHY: -1		AUX: 0000	
+VIRT: 6		PHY: -1		AUX: 0000	
+VIRT: 7		PHY: -1		AUX: 0000	
+VIRT: 8		PHY: 84		AUX: 0110	
+VIRT: 9		PHY: 85		AUX: 0110	
+
+debug> pcb
+Tick: 		 
+PID: 		2 
+PPID: 		 
+UserID: 		 
+State: 		(RUNNING, )
+Swap Flag: 		 
+Inode Index: 		 
+Input Buffer: 		 
+Mode Flag: 		0
+User Area Swap Status: 		 
+User Area Page Number: 		88 
+Kernel Stack Pointer: 		0 
+User Stack Pointer: 		4096 
+PTBR: 		29736 
+PTLR: 		10 
+
+debug>c   
+TIMER
+Previous instruction at IP = 2154: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 2156, Page No. = 4: IRET
+
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 
+Wait Memory Count: 
+Swapped Count: 
+Paging Status: 
+
+debug> pt
+VIRT: 0		PHY: 63		AUX: 0100	
+VIRT: 1		PHY: 64		AUX: 0100	
+VIRT: 2		PHY: 78		AUX: 0110	
+VIRT: 3		PHY: 79		AUX: 0110	
+VIRT: 4		PHY: 65		AUX: 0100	
+VIRT: 5		PHY: 66		AUX: 0100	
+VIRT: 6		PHY: -1		AUX: 0000	
+VIRT: 7		PHY: -1		AUX: 0000	
+VIRT: 8		PHY: 76		AUX: 0110	
+VIRT: 9		PHY: 77		AUX: 0110	
+
+debug> pcb
+Tick: 		 
+PID: 		1 
+PPID: 		 
+UserID: 		 
+State: 		(RUNNING, )
+Swap Flag: 		 
+Inode Index: 		 
+Input Buffer: 		 
+Mode Flag: 		0
+User Area Swap Status: 		 
+User Area Page Number: 		80 
+Kernel Stack Pointer: 		22 
+User Stack Pointer: 		4113 
+PTBR: 		29716 
+PTLR: 		10 
+
+debug> 
+
