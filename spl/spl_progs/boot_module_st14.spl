@@ -112,7 +112,7 @@ PTLR = 10;
 alias id R1;
 id=3;
 while(id<=15)	do
-	[PROCESS_TABLE + 16*I + 4] = TERMINATED;
+	[PROCESS_TABLE + 16*id + 4] = TERMINATED;
 	id = id+1;
 endwhile;
 return;

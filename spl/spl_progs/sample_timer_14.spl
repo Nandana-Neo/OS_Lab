@@ -1,0 +1,40 @@
+breakpoint;
+//Switch to the Kernel Stack.- backup
+//Save the value of SP to the USER SP field in the Process Table entry of the process
+[PROCESS_TABLE + [SYSTEM_STATUS_TABLE+1]*16 + 13]=SP; //logical address
+
+//Set the value of SP to the beginning of User Area Page.
+SP = [PROCESS_TABLE + [SYSTEM_STATUS_TABLE+1]*16 + 11]*512 -1 ; 
+//since kernel mode newly entered- Kernel stack is empty
+
+backup;
+
+
+//get process id of current process
+alias currentPID R0;
+currentPID = [SYSTEM_STATUS_TABLE + 1];
+
+//Change the state of the current process in its Process Table entry from RUNNING to READY.
+[PROCESS_TABLE + currentPID*16  + 4] = READY;
+
+//Loop through the process table entires and increment the TICK field of each process.
+
+
+
+//to check
+print "TIMER";
+
+//call scheduler
+call MOD_5;
+
+
+//Restore the register context of the process using RESTORE instruction.
+restore;
+//no more using registers
+
+//kernel to user stack before exit
+SP = [PROCESS_TABLE + [SYSTEM_STATUS_TABLE+1]*16 + 13];
+
+//Set the MODE_FLAG in the process table entry to 0.
+[PROCESS_TABLE + [SYSTEM_STATUS_TABLE+1]*16 + 9] =0; 
+ireturn;

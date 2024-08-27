@@ -1,0 +1,26 @@
+[PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1]*16 + 4] = TERMINATED;
+
+alias pid R0;
+pid=1;
+while(pid <=  15)  do
+	if([PROCESS_TABLE + pid*16 + 4] != TERMINATED)  then
+		call MOD_5;
+		//Restore the register context of the process using RESTORE instruction.
+		restore;
+		//no more using registers
+
+		//kernel to user stack before exit
+		SP = [PROCESS_TABLE + [SYSTEM_STATUS_TABLE+1]*16 + 13];
+
+		//Set the MODE_FLAG in the process table entry to 0.
+		[PROCESS_TABLE + [SYSTEM_STATUS_TABLE+1]*16 + 9] =0;
+		ireturn;
+
+	endif;
+	pid  = pid+1;
+endwhile;
+ 
+
+print "Exc";
+
+halt;
