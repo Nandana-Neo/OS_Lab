@@ -23,6 +23,8 @@ currentPID = [SYSTEM_STATUS_TABLE + 1];
 
 //to check
 print "TIMER";
+R0 = [SYSTEM_STATUS_TABLE+1]; //PRINT PROCESS ID of currently exec process
+print R0;
 
 //call scheduler
 call MOD_5;
