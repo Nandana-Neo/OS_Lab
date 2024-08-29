@@ -19,6 +19,12 @@ loadi(64,14);
 //mod 5
 loadi(50,63);
 loadi(51,64);
+//mod 0
+loadi(40,53);
+loadi(41,54);
+//mod 4
+loadi(48,61);
+loadi(49,62);
 //even program code
 loadi(83,69);
 
@@ -107,6 +113,8 @@ PTLR = 10;
 [PROCESS_TABLE + 31 + 16] = 10;
 
 [84*512] = [83*512 + 1];
+
+[TERMINAL_STATUS_TABLE] =
 
 //Process table entries of other processes
 alias id R1;
