@@ -13,7 +13,7 @@ if(fnno == 3)  then
 	multipush(R1,R2,R3);
 	//4. Store the function number 8 in register R1 and PID of the current process
 	R1=8;
-	//R2 = currentPID;
+	R2 = currentPID;
 	//5. Call module 0
 	call MOD_0;
 	//6. Ignore the value present in R0 as Acquire Terminal does not have any return value.
@@ -25,10 +25,11 @@ if(fnno == 3)  then
 	print R3;
 	
 	//Call Release Terminal -- MOD_0 -- 9
-	//8. Push all the registers used till now using the multipush statement as done earlier.
+	//9. Push all the registers used till now using the multipush statement as done earlier.
 	multipush(R1,R2,R3);
         //9. Store the function number 9 in register R1 and PID of the current process from the System Status table in register R2 (Can use currentPID, as it already contain current PID value).
 	R1 = 9;
+	R2 = currentPID;
 	//10. Call module 0.
 	call MOD_0;
 	//11. Return value will be stored in R0 by module 0. Save this return value in any other register if needed.

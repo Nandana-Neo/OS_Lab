@@ -6,4 +6,5 @@ load --module 5 $HOME/myexpos/spl/spl_progs/mod_5_st14.xsm
 load --module 0 $HOME/myexpos/spl/spl_progs/mod_0_st15.xsm
 load --module 4 $HOME/myexpos/spl/spl_progs/mod_4_st15.xsm
 load --int=timer $HOME/myexpos/spl/spl_progs/sample_timer_14.xsm
+load --init $HOME/myexpos/expl/expl_progs/o_13.xsm
 exit

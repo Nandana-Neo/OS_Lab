@@ -27,6 +27,7 @@ if(fnno == 9) then
 		if([PROCESS_TABLE  + R3*16 + 4]==WAIT_TERMINAL)then
 			[PROCESS_TABLE  + R3*16 + 4] = READY;
 		endif;
+		R3=R3+1;
 	endwhile;
 	R0=0;
 	return;
