@@ -1,4 +1,3 @@
-breakpoint;
 //Switch to the Kernel Stack.- backup
 //Save the value of SP to the USER SP field in the Process Table entry of the process
 [PROCESS_TABLE + [SYSTEM_STATUS_TABLE+1]*16 + 13]=SP; //logical address

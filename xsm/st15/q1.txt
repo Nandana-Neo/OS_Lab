@@ -1,0 +1,17 @@
+nandana@nandana-hplaptop:~/myexpos/xsm$ ./xsm --debug --timer 100
+TIMER
+TIMER
+TIMER
+Previous instruction at IP = 20528: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 20530, Page No. = 40: RET
+debug> tst
+Status: 1	PID: 1
+
+debug> c
+1
+Previous instruction at IP = 20608: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 20610, Page No. = 40: RET
+debug> tst
+Status: 0	PID: 1

@@ -14,8 +14,10 @@ if(fnno == 8) then
 	endwhile;
 	[TERMINAL_STATUS_TABLE]= 1;
 	[TERMINAL_STATUS_TABLE+1] = currentPID;
+	breakpoint;
 	return;
 endif;
+//F8 : Release Terminal
 if(fnno == 9) then
 	if(currentPID!=[TERMINAL_STATUS_TABLE+1]) then
 		R0=-1;
@@ -30,5 +32,6 @@ if(fnno == 9) then
 		R3=R3+1;
 	endwhile;
 	R0=0;
+	breakpoint;
 	return;
 endif;
