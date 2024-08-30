@@ -1,0 +1,74 @@
+decl
+    int arr[10];
+    int readarr(int n);
+    int printarr(int n);
+    int bubblesort(int n);
+enddecl
+
+int readarr(int n)
+{
+    decl
+        int a,b,temp;
+    enddecl
+    begin
+        a=0;
+        while(a<n) do
+            temp=exposcall("Read",-1,b);
+            arr[a]=b;
+            a=a+1;
+        endwhile;
+        return 1;
+    end
+}
+
+int printarr(int n)
+{
+    decl
+        int a,temp;
+    enddecl
+    begin
+        a=0;
+        while(a<n) do
+            temp=exposcall("Write",-2,arr[a]);
+            a=a+1;
+        endwhile;
+        return 1;
+    end
+}
+
+int bubblesort(int n)
+{
+    decl
+        int i,j,temp1;
+    enddecl
+    begin
+        i=n-1;
+        while(i>0)  do
+            j=0;
+            while(j<i)  do
+                if(arr[j]>arr[j+1]) then
+                    temp1=arr[j];
+                    arr[j]=arr[j+1];
+                    arr[j+1]=temp1;
+                endif;
+                j=j+1;
+            endwhile;
+            i=i-1;
+        endwhile;
+        return 1;
+    end
+}
+
+int  main()
+{
+    decl
+        int n,temp;
+    enddecl
+    begin
+        temp=exposcall("Read",-1,n);
+        temp=readarr(n);
+        temp=bubblesort(n);
+        temp=printarr(n);
+        return 0;
+    end
+}
