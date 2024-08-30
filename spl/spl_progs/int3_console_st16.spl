@@ -7,8 +7,9 @@ backup;
 //get process id of process that had acquired terminal
 alias reqPID R0;
 reqPID = [TERMINAL_STATUS_TABLE + 1];
+breakpoint;
 [PROCESS_TABLE + reqPID*16 + 8]=P0;
-
+breakpoint;
 //CALL Release terminal
 multipush(R0);
 R1=9;

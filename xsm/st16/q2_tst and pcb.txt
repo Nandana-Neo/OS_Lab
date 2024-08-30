@@ -1,0 +1,110 @@
+Use the XSM debugger to print out the contents of the 
+Terminal Status Table and the input buffer 
+(by dumping process table entry of the process to which read was performed) 
+before and after reading data from the input port to the input buffer of the process, 
+inside the terminal interrupt handler. 
+
+nandana@nandana-hplaptop:~/myexpos/xsm$ ./xsm  --timer 100 --debug
+TIMER
+TIMER
+123 
+Previous instruction at IP = 4144: BRKP
+Mode: KERNEL 	 PID: 0
+Next instruction at IP = 4146, Page No. = 8: MOV R16,28672
+
+debug> tst
+Status: 1	PID: 1
+debug> pcb 1
+Tick: 		 
+PID: 		1 
+PPID: 		 
+UserID: 		 
+State: 		(WAIT_TERMINAL, )
+Swap Flag: 		 
+Inode Index: 		 
+Input Buffer: 		 
+Mode Flag: 		Read
+User Area Swap Status: 		 
+User Area Page Number: 		80 
+Kernel Stack Pointer: 		12 
+User Stack Pointer: 		4116 
+PTBR: 		29716 
+PTLR: 		10 
+
+debug> c   
+Previous instruction at IP = 4160: BRKP
+Mode: KERNEL 	 PID: 0
+Next instruction at IP = 4162, Page No. = 8: PUSH R0
+debug> tst
+Status: 1	PID: 1
+
+debug> pcb 1
+Tick: 		 
+PID: 		1 
+PPID: 		 
+UserID: 		 
+State: 		(WAIT_TERMINAL, )
+Swap Flag: 		 
+Inode Index: 		 
+Input Buffer: 		123 
+Mode Flag: 		Read
+User Area Swap Status: 		 
+User Area Page Number: 		80 
+Kernel Stack Pointer: 		12 
+User Stack Pointer: 		4116 
+PTBR: 		29716 
+PTLR: 		10 
+
+debug> c
+TIMER
+TIMER
+TIMER
+456
+Previous instruction at IP = 4144: BRKP
+Mode: KERNEL 	 PID: 0
+Next instruction at IP = 4146, Page No. = 8: MOV R16,28672
+debug> tst
+Status: 1	PID: 1
+
+debug> pcb 1
+Tick: 		 
+PID: 		1 
+PPID: 		 
+UserID: 		 
+State: 		(WAIT_TERMINAL, )
+Swap Flag: 		 
+Inode Index: 		 
+Input Buffer: 		123 
+Mode Flag: 		Read
+User Area Swap Status: 		 
+User Area Page Number: 		80 
+Kernel Stack Pointer: 		12 
+User Stack Pointer: 		4116 
+PTBR: 		29716 
+PTLR: 		10 
+
+debug> c  
+Previous instruction at IP = 4160: BRKP
+Mode: KERNEL 	 PID: 0
+Next instruction at IP = 4162, Page No. = 8: PUSH R0
+
+debug> tst
+Status: 1	PID: 1
+
+debug> pcb 1
+Tick: 		 
+PID: 		1 
+PPID: 		 
+UserID: 		 
+State: 		(WAIT_TERMINAL, )
+Swap Flag: 		 
+Inode Index: 		 
+Input Buffer: 		456 
+Mode Flag: 		Read
+User Area Swap Status: 		 
+User Area Page Number: 		80 
+Kernel Stack Pointer: 		12 
+User Stack Pointer: 		4116 
+PTBR: 		29716 
+PTLR: 		10 
+debug> 
