@@ -1,0 +1,18 @@
+int main()
+{
+    decl
+        string name;
+        int dummy;
+    enddecl
+    begin
+        name="Give:";
+        write(name);
+        read(name);
+        
+        dummy=exposcall("Exec",name);
+
+        name="Fail";
+        write(name);
+        return 0;
+    end
+}

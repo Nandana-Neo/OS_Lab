@@ -1,0 +1,15 @@
+load --module 7 $HOME/myexpos/spl/spl_progs/st17/boot_module_st17.xsm
+load --module 5 $HOME/myexpos/spl/spl_progs/mod_5_st14.xsm
+load --module 0 $HOME/myexpos/spl/spl_progs/mod_0_st16.xsm
+load --module 4 $HOME/myexpos/spl/spl_progs/mod_4_st16.xsm
+load --module 1 $HOME/myexpos/spl/spl_progs/st17/mod_1_st17.xsm
+load --module 2 $HOME/myexpos/spl/spl_progs/st17/mod_2_st17.xsm
+load --int=7 $HOME/myexpos/spl/spl_progs/sample_int7_st15.xsm
+load --int=10 $HOME/myexpos/spl/spl_progs/haltprog_st14.xsm
+load --int=timer $HOME/myexpos/spl/spl_progs/sample_timer_14.xsm
+load --int=console $HOME/myexpos/spl/spl_progs/int3_console_st16.xsm
+load --int=6 $HOME/myexpos/spl/spl_progs/int6_st16.xsm
+load --int=9 $HOME/myexpos/spl/spl_progs/st17/int9_st17.xsm
+load --idle $HOME/myexpos/expl/samples/idle_st12.xsm
+load --init $HOME/myexpos/expl/expl_progs/st17/shell.xsm
+exit
