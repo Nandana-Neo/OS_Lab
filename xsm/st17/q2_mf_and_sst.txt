@@ -1,0 +1,673 @@
+$ ./xsm --timer 100 --debug
+TIMER
+TIMER
+TIMER
+Give:
+TIMER
+TIMER
+odd.xsm
+Previous instruction at IP = 4144: BRKP
+Mode: KERNEL 	 PID: 0
+Next instruction at IP = 4146, Page No. = 8: MOV R16,28672
+debug> c
+Previous instruction at IP = 4160: BRKP
+Mode: KERNEL 	 PID: 0
+Next instruction at IP = 4162, Page No. = 8: PUSH R0
+debug> c
+TIMER
+TIMER
+TIMER
+Previous instruction at IP = 22758: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22760, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 46
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> mf
+0	0		1	1		2	1		3	1
+4	1		5	1		6	1		7	1
+8	1		9	1		10	1		11	1
+12	1		13	1		14	1		15	1
+16	1		17	1		18	1		19	1
+20	1		21	1		22	1		23	1
+24	1		25	1		26	1		27	1
+28	1		29	1		30	1		31	1
+32	1		33	1		34	1		35	1
+36	1		37	1		38	1		39	1
+40	1		41	1		42	1		43	1
+44	1		45	1		46	1		47	1
+48	1		49	1		50	1		51	1
+52	1		53	1		54	1		55	1
+56	1		57	1		58	1		59	1
+60	1		61	1		62	1		63	1
+64	1		65	1		66	1		67	1
+68	1		69	1		70	1		71	1
+72	1		73	1		74	1		75	1
+76	1		77	1		78	1		79	1
+80	1		81	1		82	1		83	0
+84	0		85	0		86	0		87	0
+88	0		89	0		90	0		91	0
+92	0		93	0		94	0		95	0
+96	0		97	0		98	0		99	0
+100	0		101	0		102	0		103	0
+104	0		105	0		106	0		107	0
+108	0		109	0		110	0		111	0
+112	0		113	0		114	0		115	0
+116	0		117	0		118	0		119	0
+120	0		121	0		122	0		123	0
+124	0		125	0		126	0		127	0
+debug> c
+Previous instruction at IP = 22758: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22760, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 46
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> mf
+0	-1		1	1		2	1		3	1
+4	1		5	1		6	1		7	1
+8	1		9	1		10	1		11	1
+12	1		13	1		14	1		15	1
+16	1		17	1		18	1		19	1
+20	1		21	1		22	1		23	1
+24	1		25	1		26	1		27	1
+28	1		29	1		30	1		31	1
+32	1		33	1		34	1		35	1
+36	1		37	1		38	1		39	1
+40	1		41	1		42	1		43	1
+44	1		45	1		46	1		47	1
+48	1		49	1		50	1		51	1
+52	1		53	1		54	1		55	1
+56	1		57	1		58	1		59	1
+60	1		61	1		62	1		63	1
+64	1		65	1		66	1		67	1
+68	1		69	1		70	1		71	1
+72	1		73	1		74	1		75	1
+76	1		77	1		78	1		79	1
+80	1		81	1		82	1		83	0
+84	0		85	0		86	0		87	0
+88	0		89	0		90	0		91	0
+92	0		93	0		94	0		95	0
+96	0		97	0		98	0		99	0
+100	0		101	0		102	0		103	0
+104	0		105	0		106	0		107	0
+108	0		109	0		110	0		111	0
+112	0		113	0		114	0		115	0
+116	0		117	0		118	0		119	0
+120	0		121	0		122	0		123	0
+124	0		125	0		126	0		127	0
+debug> c
+Previous instruction at IP = 22758: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22760, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 46
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> mf
+0	-2		1	1		2	1		3	1
+4	1		5	1		6	1		7	1
+8	1		9	1		10	1		11	1
+12	1		13	1		14	1		15	1
+16	1		17	1		18	1		19	1
+20	1		21	1		22	1		23	1
+24	1		25	1		26	1		27	1
+28	1		29	1		30	1		31	1
+32	1		33	1		34	1		35	1
+36	1		37	1		38	1		39	1
+40	1		41	1		42	1		43	1
+44	1		45	1		46	1		47	1
+48	1		49	1		50	1		51	1
+52	1		53	1		54	1		55	1
+56	1		57	1		58	1		59	1
+60	1		61	1		62	1		63	1
+64	1		65	1		66	1		67	1
+68	1		69	1		70	1		71	1
+72	1		73	1		74	1		75	1
+76	1		77	1		78	1		79	1
+80	1		81	1		82	1		83	0
+84	0		85	0		86	0		87	0
+88	0		89	0		90	0		91	0
+92	0		93	0		94	0		95	0
+96	0		97	0		98	0		99	0
+100	0		101	0		102	0		103	0
+104	0		105	0		106	0		107	0
+108	0		109	0		110	0		111	0
+112	0		113	0		114	0		115	0
+116	0		117	0		118	0		119	0
+120	0		121	0		122	0		123	0
+124	0		125	0		126	0		127	0
+debug> c
+Previous instruction at IP = 22758: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22760, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 46
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> c
+Previous instruction at IP = 22758: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22760, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 46
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> c
+Previous instruction at IP = 22758: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22760, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 46
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> c
+Previous instruction at IP = 22758: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22760, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 46
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> c
+Previous instruction at IP = 22758: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22760, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 46
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> c
+Previous instruction at IP = 22758: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22760, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 47
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> mf
+0	-7		1	1		2	1		3	1
+4	1		5	1		6	1		7	1
+8	1		9	1		10	1		11	1
+12	1		13	1		14	1		15	1
+16	1		17	1		18	1		19	1
+20	1		21	1		22	1		23	1
+24	1		25	1		26	1		27	1
+28	1		29	1		30	1		31	1
+32	1		33	1		34	1		35	1
+36	1		37	1		38	1		39	1
+40	1		41	1		42	1		43	1
+44	1		45	1		46	1		47	1
+48	1		49	1		50	1		51	1
+52	1		53	1		54	1		55	1
+56	1		57	1		58	1		59	1
+60	1		61	1		62	1		63	1
+64	1		65	1		66	1		67	1
+68	1		69	1		70	1		71	1
+72	1		73	1		74	1		75	1
+76	1		77	1		78	1		79	1
+80	1		81	1		82	0		83	0
+84	0		85	0		86	0		87	0
+88	0		89	0		90	0		91	0
+92	0		93	0		94	0		95	0
+96	0		97	0		98	0		99	0
+100	0		101	0		102	0		103	0
+104	0		105	0		106	0		107	0
+108	0		109	0		110	0		111	0
+112	0		113	0		114	0		115	0
+116	0		117	0		118	0		119	0
+120	0		121	0		122	0		123	0
+124	0		125	0		126	0		127	0
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 47
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> c
+Previous instruction at IP = 22650: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22652, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 46
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> mf
+0	-7		1	1		2	1		3	1
+4	1		5	1		6	1		7	1
+8	1		9	1		10	1		11	1
+12	1		13	1		14	1		15	1
+16	1		17	1		18	1		19	1
+20	1		21	1		22	1		23	1
+24	1		25	1		26	1		27	1
+28	1		29	1		30	1		31	1
+32	1		33	1		34	1		35	1
+36	1		37	1		38	1		39	1
+40	1		41	1		42	1		43	1
+44	1		45	1		46	1		47	1
+48	1		49	1		50	1		51	1
+52	1		53	1		54	1		55	1
+56	1		57	1		58	1		59	1
+60	1		61	1		62	1		63	1
+64	1		65	1		66	1		67	1
+68	1		69	1		70	1		71	1
+72	1		73	1		74	1		75	1
+76	1		77	1		78	1		79	1
+80	2		81	1		82	1		83	0
+84	0		85	0		86	0		87	0
+88	0		89	0		90	0		91	0
+92	0		93	0		94	0		95	0
+96	0		97	0		98	0		99	0
+100	0		101	0		102	0		103	0
+104	0		105	0		106	0		107	0
+108	0		109	0		110	0		111	0
+112	0		113	0		114	0		115	0
+116	0		117	0		118	0		119	0
+120	0		121	0		122	0		123	0
+124	0		125	0		126	0		127	0
+debug> c
+Previous instruction at IP = 22650: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22652, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 45
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> mf
+0	-7		1	1		2	1		3	1
+4	1		5	1		6	1		7	1
+8	1		9	1		10	1		11	1
+12	1		13	1		14	1		15	1
+16	1		17	1		18	1		19	1
+20	1		21	1		22	1		23	1
+24	1		25	1		26	1		27	1
+28	1		29	1		30	1		31	1
+32	1		33	1		34	1		35	1
+36	1		37	1		38	1		39	1
+40	1		41	1		42	1		43	1
+44	1		45	1		46	1		47	1
+48	1		49	1		50	1		51	1
+52	1		53	1		54	1		55	1
+56	1		57	1		58	1		59	1
+60	1		61	1		62	1		63	1
+64	1		65	1		66	1		67	1
+68	1		69	1		70	1		71	1
+72	1		73	1		74	1		75	1
+76	1		77	1		78	1		79	1
+80	2		81	1		82	1		83	1
+84	0		85	0		86	0		87	0
+88	0		89	0		90	0		91	0
+92	0		93	0		94	0		95	0
+96	0		97	0		98	0		99	0
+100	0		101	0		102	0		103	0
+104	0		105	0		106	0		107	0
+108	0		109	0		110	0		111	0
+112	0		113	0		114	0		115	0
+116	0		117	0		118	0		119	0
+120	0		121	0		122	0		123	0
+124	0		125	0		126	0		127	0
+debug> c
+Previous instruction at IP = 22650: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22652, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 44
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> mf
+0	-7		1	1		2	1		3	1
+4	1		5	1		6	1		7	1
+8	1		9	1		10	1		11	1
+12	1		13	1		14	1		15	1
+16	1		17	1		18	1		19	1
+20	1		21	1		22	1		23	1
+24	1		25	1		26	1		27	1
+28	1		29	1		30	1		31	1
+32	1		33	1		34	1		35	1
+36	1		37	1		38	1		39	1
+40	1		41	1		42	1		43	1
+44	1		45	1		46	1		47	1
+48	1		49	1		50	1		51	1
+52	1		53	1		54	1		55	1
+56	1		57	1		58	1		59	1
+60	1		61	1		62	1		63	1
+64	1		65	1		66	1		67	1
+68	1		69	1		70	1		71	1
+72	1		73	1		74	1		75	1
+76	1		77	1		78	1		79	1
+80	2		81	1		82	1		83	1
+84	1		85	0		86	0		87	0
+88	0		89	0		90	0		91	0
+92	0		93	0		94	0		95	0
+96	0		97	0		98	0		99	0
+100	0		101	0		102	0		103	0
+104	0		105	0		106	0		107	0
+108	0		109	0		110	0		111	0
+112	0		113	0		114	0		115	0
+116	0		117	0		118	0		119	0
+120	0		121	0		122	0		123	0
+124	0		125	0		126	0		127	0
+debug> c
+Previous instruction at IP = 22650: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22652, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 43
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> mf
+0	-7		1	1		2	1		3	1
+4	1		5	1		6	1		7	1
+8	1		9	1		10	1		11	1
+12	1		13	1		14	1		15	1
+16	1		17	1		18	1		19	1
+20	1		21	1		22	1		23	1
+24	1		25	1		26	1		27	1
+28	1		29	1		30	1		31	1
+32	1		33	1		34	1		35	1
+36	1		37	1		38	1		39	1
+40	1		41	1		42	1		43	1
+44	1		45	1		46	1		47	1
+48	1		49	1		50	1		51	1
+52	1		53	1		54	1		55	1
+56	1		57	1		58	1		59	1
+60	1		61	1		62	1		63	1
+64	1		65	1		66	1		67	1
+68	1		69	1		70	1		71	1
+72	1		73	1		74	1		75	1
+76	1		77	1		78	1		79	1
+80	2		81	1		82	1		83	1
+84	1		85	1		86	0		87	0
+88	0		89	0		90	0		91	0
+92	0		93	0		94	0		95	0
+96	0		97	0		98	0		99	0
+100	0		101	0		102	0		103	0
+104	0		105	0		106	0		107	0
+108	0		109	0		110	0		111	0
+112	0		113	0		114	0		115	0
+116	0		117	0		118	0		119	0
+120	0		121	0		122	0		123	0
+124	0		125	0		126	0		127	0
+debug> c 
+Previous instruction at IP = 22650: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22652, Page No. = 44: RET
+debug> sst
+Current User ID: 
+Current PID: 1
+Memory Free Count: 42
+Wait Memory Count: 0
+Swapped Count: 
+Paging Status: 
+debug> mf
+0	-7		1	1		2	1		3	1
+4	1		5	1		6	1		7	1
+8	1		9	1		10	1		11	1
+12	1		13	1		14	1		15	1
+16	1		17	1		18	1		19	1
+20	1		21	1		22	1		23	1
+24	1		25	1		26	1		27	1
+28	1		29	1		30	1		31	1
+32	1		33	1		34	1		35	1
+36	1		37	1		38	1		39	1
+40	1		41	1		42	1		43	1
+44	1		45	1		46	1		47	1
+48	1		49	1		50	1		51	1
+52	1		53	1		54	1		55	1
+56	1		57	1		58	1		59	1
+60	1		61	1		62	1		63	1
+64	1		65	1		66	1		67	1
+68	1		69	1		70	1		71	1
+72	1		73	1		74	1		75	1
+76	1		77	1		78	1		79	1
+80	2		81	1		82	1		83	1
+84	1		85	1		86	1		87	0
+88	0		89	0		90	0		91	0
+92	0		93	0		94	0		95	0
+96	0		97	0		98	0		99	0
+100	0		101	0		102	0		103	0
+104	0		105	0		106	0		107	0
+108	0		109	0		110	0		111	0
+112	0		113	0		114	0		115	0
+116	0		117	0		118	0		119	0
+120	0		121	0		122	0		123	0
+124	0		125	0		126	0		127	0
+debug> c
+TIMER
+TIMER
+1
+TIMER
+TIMER
+3
+TIMER
+TIMER
+TIMER
+TIMER
+5
+TIMER
+TIMER
+7
+TIMER
+TIMER
+TIMER
+TIMER
+9
+TIMER
+TIMER
+11
+TIMER
+TIMER
+TIMER
+TIMER
+13
+TIMER
+TIMER
+15
+TIMER
+TIMER
+17
+TIMER
+TIMER
+TIMER
+TIMER
+19
+TIMER
+TIMER
+21
+TIMER
+TIMER
+TIMER
+TIMER
+23
+TIMER
+TIMER
+25
+TIMER
+TIMER
+TIMER
+TIMER
+27
+TIMER
+TIMER
+29
+TIMER
+TIMER
+31
+TIMER
+TIMER
+TIMER
+TIMER
+33
+TIMER
+TIMER
+35
+TIMER
+TIMER
+TIMER
+TIMER
+37
+TIMER
+TIMER
+39
+TIMER
+TIMER
+TIMER
+TIMER
+41
+TIMER
+TIMER
+43
+TIMER
+TIMER
+45
+TIMER
+TIMER
+TIMER
+TIMER
+47
+TIMER
+TIMER
+49
+TIMER
+TIMER
+TIMER
+TIMER
+51
+TIMER
+TIMER
+53
+TIMER
+TIMER
+TIMER
+TIMER
+55
+TIMER
+TIMER
+57
+TIMER
+TIMER
+59
+TIMER
+TIMER
+TIMER
+TIMER
+61
+TIMER
+TIMER
+63
+TIMER
+TIMER
+TIMER
+TIMER
+65
+TIMER
+TIMER
+67
+TIMER
+TIMER
+TIMER
+TIMER
+69
+TIMER
+TIMER
+71
+TIMER
+TIMER
+73
+TIMER
+TIMER
+TIMER
+TIMER
+75
+TIMER
+TIMER
+77
+TIMER
+TIMER
+TIMER
+TIMER
+79
+TIMER
+TIMER
+81
+TIMER
+TIMER
+TIMER
+TIMER
+83
+TIMER
+TIMER
+85
+TIMER
+TIMER
+87
+TIMER
+TIMER
+TIMER
+TIMER
+89
+TIMER
+TIMER
+91
+TIMER
+TIMER
+TIMER
+TIMER
+93
+TIMER
+TIMER
+95
+TIMER
+TIMER
+TIMER
+TIMER
+97
+TIMER
+TIMER
+99
+TIMER
+TIMER
+Exc
+Machine is halting.
