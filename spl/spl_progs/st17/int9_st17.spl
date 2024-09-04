@@ -128,6 +128,7 @@ endwhile;
 SP=8*512;
 [[PTBR+16]*512]=[[PTBR+8]*512+1];
 [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE +1] * 16) +13] =SP;
+//just  changed the uptr.. kptr is 0... did not change anywhere so it's fine
 
 //13. Change SP to user stack, change the MODE FLAG back to user mode and return to user mode.
 [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE+1]*16)+9] = 0;
