@@ -1,0 +1,13 @@
+int main()
+{
+	decl
+        string x;
+		int num;
+	enddecl
+
+	begin
+		x="Hi";
+		num = exposcall("Write",-2,x);
+		return 0;
+	end
+}

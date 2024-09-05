@@ -1,4 +1,4 @@
-
+///DEVICE MANAGER
 
 //1. Function number and current PID are stored in registers R1 and R2. Give meaningful names to these arguments.
 alias fnno R1;
@@ -63,6 +63,29 @@ if( fnno==4 ) then
 	return;
 endif;
 
+//Fn2: Disk Load
+if(fnno==2) then
+	//Acquire disk fn in mod_0(resource manager)
+	multipush(R0,R1,R2,R3,R4,R5);
+	R1=3;
+	call MOD_0; //resource manager
+	multipop(R0,R1,R2,R3,R4,R5);
+
+	//Reset the LOAD/STORE BIT, set PAGE NUMBER and BLOCK NUMBER in the Disk Status Table.
+	[DISK_STATUS_TABLE+1]=0;  // Load/store bit set to load(0)
+	[DISK_STATUS_TABLE+2]=R3;	// Mem Pg no
+	[DISK_STATUS_TABLE+3]=R4;	//Disk block no
+
+	//Use the load statement to load the disk block to memory;
+	load(R3,R4);
+
+	//Set the state as (WAIT_DISK, - );
+    [PROCESS_TABLE+ 16*currentPID + 4]=WAIT_DISK;
+
+    //Call the switch_context() function from the Scheduler Module.
+    call MOD_5; //scheduler
+    return;
+endif;
 
 return;
 

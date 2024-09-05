@@ -1,0 +1,62 @@
+//Terminal Handling
+
+//F8 : Acquire Terminal
+
+alias fnno  R1;
+alias currentPID R2;
+
+if(fnno == 8) then
+	//busy wait
+	while([TERMINAL_STATUS_TABLE] == 1) do
+		[PROCESS_TABLE  + currentPID*16 + 4]=WAIT_TERMINAL;
+		multipush(R1,R2);
+		call  MOD_5;//scheduler
+		multipop(R1,R2);
+	endwhile;
+	[TERMINAL_STATUS_TABLE]= 1;
+	[TERMINAL_STATUS_TABLE+1] = currentPID;
+	
+	return;
+endif;
+//F8 : Release Terminal
+if(fnno == 9) then
+	if(currentPID!=[TERMINAL_STATUS_TABLE+1]) then
+		R0=-1;
+		return;
+	endif;
+	[TERMINAL_STATUS_TABLE] =0;
+	R3=1;
+	while(R3<16) do
+		if([PROCESS_TABLE  + R3*16 + 4]==WAIT_TERMINAL)then
+			[PROCESS_TABLE  + R3*16 + 4] = READY;
+		endif;
+		R3=R3+1;
+	endwhile;
+	R0=0;
+	return;
+endif;
+
+
+//F3: Acquire Disk
+//while ( disk is locked ){        /* Check the Status field in the Disk Status Table. */
+//    Set state of the process as ( WAIT_DISK , - );
+//    Call the switch_context() function from the Scheduler Module.
+//}
+//Lock the disk by setting PID and the status field in the Disk Status Table.
+//return;
+
+if(fnno==3) then
+	while([DISK_STATUS_TABLE]==1) do
+		[PROCESS_TABLE+currentPID*16+4]=WAIT_DISK;
+		multipush(R0,R1,R2);
+		call MOD_5;//scheduler
+		//When the disk is finally free, the process is woken up by the disk interrupt handler
+		multipop(R0,R1,R2);
+	endwhile;
+
+	[DISK_STATUS_TABLE]=1;
+	[DISK_STATUS_TABLE+4]=currentPID;
+	return;
+endif;
+
+return;
