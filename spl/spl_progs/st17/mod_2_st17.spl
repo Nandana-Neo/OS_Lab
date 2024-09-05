@@ -32,7 +32,6 @@ if(fnno==1) then
     R0=R2-57*512; //page no of the free page
 
         //v) Return to the caller
-    breakpoint;
     return;
 endif;
 
@@ -55,7 +54,6 @@ if(fnno==2) then
         R3=R3+1;
     endwhile;
     //iv)  Return to the caller
-    breakpoint;
     return;
 endif;
 
