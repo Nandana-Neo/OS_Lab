@@ -1,0 +1,37 @@
+$ ./xsm --timer 100 --debug
+TIMER
+TIMER
+TIMER
+Give:
+TIMER
+TIMER
+dummy.xsm
+TIMER
+TIMER
+TIMER
+Previous instruction at IP = 3072: BRKP
+Mode: KERNEL 	 PID: 0
+Next instruction at IP = 3074, Page No. = 6: MOV R16,28672
+debug> dst
+Status: 1
+Load/Store Bit: 0
+Page Number: 86
+Block Number: 71
+PID: 1
+debug> c
+Previous instruction at IP = 3184: BRKP
+Mode: KERNEL 	 PID: 0
+Next instruction at IP = 3186, Page No. = 6: IRET
+debug> dst
+Status: 0
+Load/Store Bit: 0
+Page Number: 86
+Block Number: 71
+PID: 1
+debug> c
+TIMER
+TIMER
+TIMER
+Hi
+Exc
+Machine is halting.

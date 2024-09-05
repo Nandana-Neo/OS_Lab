@@ -1,5 +1,4 @@
 //System call 9 exec
-breakpoint;
 //1. SP
 alias userSP R0;
 userSP = SP;
