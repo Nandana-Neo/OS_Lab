@@ -76,15 +76,11 @@ endwhile;
 // ii) Invoke the Get Free Page function to allocate 2 stack and 2 heap pages. Also validate the corresponding entries in page table.
 multipush(R0,R1,R2,R3);
 //HEAP
-R1=1;
-call MOD_2;//get free page
-[PTBR+4]=R0;
-[PTBR+5]="0110";
+[PTBR+4]=-1;
+[PTBR+5]="0000";
 
-R1=1;
-call MOD_2;//get free page
-[PTBR+6]=R0;
-[PTBR+7]="0110";
+[PTBR+6]=-1;
+[PTBR+7]="0000";
 
 //STACK
 R1=1;
@@ -98,9 +94,7 @@ call MOD_2;//get free page
 
 multipop(R0,R1,R2,R3);
 
-// iii) Find out the number of blocks occupied by the file from inode table. Allocate same number of code pages by invoking the Get Free Page function and update the page table entries.
-alias size R4;
-size=([59*512+file_index*16+2]+511)/512;
+
 //code
 [PTBR+8] = -1;
 [PTBR+9] = "0000";
@@ -110,32 +104,28 @@ size=([59*512+file_index*16+2]+511)/512;
 [PTBR+13] = "0000"; 
 [PTBR+14] = -1;
 [PTBR+15] = "0000"; 
-R0=8;
-while((R0-8)/2<size) do
-    multipush(R0,R1,R2,R3,R4);
-    R1=1;
-    call MOD_2;//get free page
-    R5=R0;
-    multipop(R0,R1,R2,R3,R4);
-    [PTBR+R0] = R5;
-    [PTBR+R0+1] = "0100";
-    R0=R0+2;
-endwhile;
 
-//11. Load the code blocks from the disk to the memory pages using loadi statement. (We will change this step in the next stage.) 
-R0=0;
-while(R0<size)  do
-    R5=[PTBR+8+2*R0];
-    R6=[59*512+file_index*16+8+R0];
-    multipush(R0,R1,R2,R3,R4);
-    R1=2;
-    R2=[SYSTEM_STATUS_TABLE+1];
-    R3=R5;
-    R4=R6;
-    call MOD_4; //call  disk load fn from Device Manager
-    multipop(R0,R1,R2,R3,R4);
-    R0=R0+1;
-endwhile;
+multipush(R0,R1,R2,R3,R4);
+R1=5;
+R2=[59*512 + file_index*16 + 8]; //1st code block number from the inode table using file_index
+call MOD_2; //Get Code Pg fn in MEMORY MANAGER MODULE
+[PTBR+8] = R0;
+[PTBR+9] = "0100";
+multipop(R0,R1,R2,R3,R4);
+
+//disk map table of process                 = //inode table entry
+/// use process id in system status table     // use file_index in disk
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+0]=-1;
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+1]=-1;
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+2]=-1;
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+3]=-1;
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+4]=[59*512 + file_index*16 + 8];
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+5]=[59*512 + file_index*16 + 9];
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+6]=[59*512 + file_index*16 + 10];
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+7]=[59*512 + file_index*16 + 11];
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+8]=-1;
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+9]=-1;
+
 
 
 //12. Store the entry point IP (present in the header of first code page) value on top of the user stack.
