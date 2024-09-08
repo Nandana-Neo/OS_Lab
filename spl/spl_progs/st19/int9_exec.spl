@@ -8,6 +8,7 @@ SP = [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE+1] * 16) + 11]* 512 -1;
 
 //2. MODE FLAG IN PROCESS TABLE
 [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE + 1] * 16) + 9] = 9; 
+PTBR=[PROCESS_TABLE + ( [SYSTEM_STATUS_TABLE + 1] * 16) + 14];
 
 //3.  arguments
 alias filename R1;
@@ -40,7 +41,7 @@ endif;
 //and pages of the current process.
 multipush(R0,R1,R2);
 R1=3;
-R2=file_index;
+R2=[SYSTEM_STATUS_TABLE+1];
 call MOD_1;   //Process Manager Module 
 multipop(R0,R1,R2);
 
@@ -56,8 +57,8 @@ endif;
 SP=user_area_pg*512 -1;
 
 //PER PROCEESS RESOURCE TABLE
-R4=SP+1+496;    //496=511-16+1
-while(R4<=SP+1+511) do
+R4=(user_area_pg+1)*512-16;    //496=511-16+1
+while(R4<(user_area_pg+1)*512) do
     [R4]=-1;
     R4=R4+1;
 endwhile;

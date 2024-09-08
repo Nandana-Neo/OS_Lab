@@ -67,18 +67,18 @@ if(fnno==4) then
     while(R3<=3) do
         if([DISK_MAP_TABLE+PID*10+R3]!=-1) then //heap
             multipush(R0,R1,R2,R3);
+            R3=PID;
             R1=4;
             R2=[DISK_MAP_TABLE+PID*10+R3];
-            R3=PID;
             call MOD_2;//Release block fn in MEMORY MANAGER
             multipop(R0,R1,R2,R3);
         endif;
         
         if([DISK_MAP_TABLE+PID*10+R3+6]!=-1) then //stack
             multipush(R0,R1,R2,R3);
+            R3=PID;
             R1=4;
             R2=[DISK_MAP_TABLE+PID*10+R3+6];
-            R3=PID;
             call MOD_2;//Release block fn in MEMORY MANAGER
             multipop(R0,R1,R2,R3);
         endif;

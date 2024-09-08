@@ -46,6 +46,8 @@ loadi(64,14);
 //init
 loadi(65,7);
 loadi(66,8);
+//Load the Disk Free List from the disk block 2 to the memory page 61.
+loadi(61,2);
 
 
 //INIT PROCESS WITH PID=1
@@ -89,11 +91,20 @@ PTLR=10;
 [PROCESS_TABLE + 31] = 10;
 
 //PER PROCEESS RESOURCE TABLE
-R1=80*512+496;    //496=511-16+1
-while(R1<=80*512+511) do
+R1=81*512-16;    //496=511-16+1
+while(R1<81*512) do
     [R1]=-1;
     R1=R1+1;
 endwhile;
+
+//PER ROCESS DISK MAP TABLE
+R1=0;
+while(R1<10)	do
+	[DISK_MAP_TABLE+10+R1]=-1;
+	R1=R1+1;
+endwhile;
+[DISK_MAP_TABLE+10+4]=7;
+[DISK_MAP_TABLE+10+5]=8;
 
 //Mem Free List
 //initialise to 0

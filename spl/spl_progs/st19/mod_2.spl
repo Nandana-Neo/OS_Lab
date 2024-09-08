@@ -57,6 +57,12 @@ if(fnno==2) then
     return;
 endif;
 
+//RELEASE BLOCK fn: 4
+if(fnno == 4)   then
+    [DISK_FREE_LIST+R2]=0;
+    return;
+endif;
+
 //GET CODE PG fn: 5
 if(fnno==5) then
     alias blockno R2;
