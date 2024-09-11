@@ -1,0 +1,51 @@
+//Write an ExpL program to implement a linked list. Your program should first read an integer N, then read N intergers from console and store them in the linked list and print the linked list to the console. Run this program using shell version-I of stage 17. 
+type
+ll
+{
+    int val;
+    ll next;
+}
+endtype
+
+int main()
+{
+    decl
+        int val;
+        int N;
+        ll head,node,node1;
+        int dummy;
+    enddecl
+    begin
+        read(N);
+        dummy=initialize();
+        dummy=1;
+        head=null;
+        node=null;
+
+        while(dummy<=N) do
+            read(val);
+            if(node==null) then
+                head=alloc();
+                head.val=val;
+                head.next=null;
+                node=head;
+            else
+                node1=alloc();
+                node1.val=val;
+                node1.next=null;
+                node.next=node1;
+                node=node1;
+            endif;
+            dummy=dummy+1;
+        endwhile;
+
+        node=head;
+        while(node!=null)   do
+            write(node.val);
+            node1=node;
+            node=node.next;
+            free(node1);
+        endwhile;
+        return 0;
+    end
+}
