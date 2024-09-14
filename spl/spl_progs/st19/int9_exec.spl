@@ -39,11 +39,11 @@ endif;
 //6. Call the Exit Process function in process 
 //manager module to deallocate the resources 
 //and pages of the current process.
-multipush(R0,R1,R2);
+multipush(R0,R1,R2,PTBR,PTLR);
 R1=3;
 R2=[SYSTEM_STATUS_TABLE+1];
 call MOD_1;   //Process Manager Module 
-multipop(R0,R1,R2);
+multipop(R0,R1,R2,PTBR,PTLR);
 
 //7. Get the user area page number from the process table of the current process. This page has been deallocated by the Exit Process function. Reclaim the same page by incrementing the memory free list entry of user area page and decrementing the MEM_FREE_COUNT field in the system status table. (same user area page is reclaimed - why?)
 alias user_area_pg R3;
@@ -75,7 +75,7 @@ endwhile;
 [PTBR+2]=64;
 [PTBR+3]="0100";
 // ii) Invoke the Get Free Page function to allocate 2 stack and 2 heap pages. Also validate the corresponding entries in page table.
-multipush(R0,R1,R2,R3);
+multipush(R0,R1,R2,R3,PTBR,PTLR);
 //HEAP
 [PTBR+4]=-1;
 [PTBR+5]="0000";
@@ -93,7 +93,7 @@ call MOD_2;//get free page
 [PTBR+18] = R0;
 [PTBR+19] = "0110";
 
-multipop(R0,R1,R2,R3);
+multipop(R0,R1,R2,R3,PTBR,PTLR);
 
 
 //code
@@ -106,13 +106,14 @@ multipop(R0,R1,R2,R3);
 [PTBR+14] = -1;
 [PTBR+15] = "0000"; 
 
-multipush(R0,R1,R2,R3,R4);
+multipush(R0,R1,R2,R3,R4,PTBR,PTLR);
+breakpoint;
 R1=5;
 R2=[59*512 + file_index*16 + 8]; //1st code block number from the inode table using file_index
 call MOD_2; //Get Code Pg fn in MEMORY MANAGER MODULE
 [PTBR+8] = R0;
 [PTBR+9] = "0100";
-multipop(R0,R1,R2,R3,R4);
+multipop(R0,R1,R2,R3,R4,PTBR,PTLR);
 
 //disk map table of process                 = //inode table entry
 /// use process id in system status table     // use file_index in disk
