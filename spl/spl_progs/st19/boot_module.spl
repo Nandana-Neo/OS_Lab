@@ -49,7 +49,6 @@ loadi(66,8);
 //Load the Disk Free List from the disk block 2 to the memory page 61.
 loadi(61,2);
 
-
 //INIT PROCESS WITH PID=1
 //PAGE TABLE
 PTBR= PAGE_TABLE_BASE+20;

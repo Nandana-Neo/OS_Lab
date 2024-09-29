@@ -11,7 +11,7 @@ if(fnno == 3)  then
 
 	//Call Acquire Terminal -- MOD_0 -- 8
 	//3. Push all the registers used till now in this module using the multipush statement in SPL as done earlier.
-	multipush(R1,R2,R3);
+	multipush(R1,R2,R3,BP);
 	//4. Store the function number 8 in register R1 and PID of the current process
 	R1=8;
 	//R2 = currentPID;
@@ -19,7 +19,7 @@ if(fnno == 3)  then
 	call MOD_0;
 	//6. Ignore the value present in R0 as Acquire Terminal does not have any return value.
 	//7. Use the multipop statement to restore the registers as done earlier. 
-	multipop(R1,R2,R3);
+	multipop(R1,R2,R3,BP);
 
 	//Print word
 	//8. Print the word in register R3, using the print statement
@@ -27,7 +27,7 @@ if(fnno == 3)  then
 	
 	//Call Release Terminal -- MOD_0 -- 9
 	//8. Push all the registers used till now using the multipush statement as done earlier.
-	multipush(R1,R2,R3);
+	multipush(R1,R2,R3,BP);
         //9. Store the function number 9 in register R1 and PID of the current process from the System Status table in register R2 (Can use currentPID, as it already contain current PID value).
 	R1 = 9;
 	//10. Call module 0.
@@ -35,7 +35,7 @@ if(fnno == 3)  then
 	//11. Return value will be stored in R0 by module 0. Save this return value in any other register if needed.
 	R4 = R0;
 	//12. Restore the registers using the multipop statement.
-	multipop(R1,R2,R3);
+	multipop(R1,R2,R3,BP);
 	//13. Return using the return statement
 	return;
 
@@ -44,11 +44,11 @@ endif;
 //Fn4:Terminal Read
 if( fnno==4 ) then
 	//Calling Acquire Terminal fn
-	multipush(R1,R2,R3);
+	multipush(R1,R2,R3,BP);
 	R1=8;
 	R2=currentPID;
 	call MOD_0;  //resource manager
-	multipop(R1,R2,R3);
+	multipop(R1,R2,R3,BP);
 
 	read;
 

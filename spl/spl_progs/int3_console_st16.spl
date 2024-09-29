@@ -15,7 +15,7 @@ multipush(R0);
 R1=9;
 R2=reqPID;
 call MOD_0;
-multipop(R1);
+multipop(R0);
 
 restore;
 

@@ -21,8 +21,8 @@ filename = [[PTBR + 2*((userSP-4)/512)]*512 + (userSP-4)%512];
 alias file_index R2;
 file_index=0;
 while(file_index<60) do
-        if([59*512 + file_index*16 +1]==filename) then
-            if([59*512 + file_index*16]==3) then
+        if([INODE_TABLE + (file_index*16) +1]==filename) then
+            if([INODE_TABLE + (file_index*16)]==3) then
                 break;
             endif;
         endif;
@@ -48,10 +48,10 @@ multipop(R0,R1,R2,PTBR,PTLR);
 //7. Get the user area page number from the process table of the current process. This page has been deallocated by the Exit Process function. Reclaim the same page by incrementing the memory free list entry of user area page and decrementing the MEM_FREE_COUNT field in the system status table. (same user area page is reclaimed - why?)
 alias user_area_pg R3;
 user_area_pg =  [PROCESS_TABLE+([SYSTEM_STATUS_TABLE+1]*16) + 11];
-if([57*512 + user_area_pg]==0)  then
+if([MEMORY_FREE_LIST + user_area_pg]==0)  then
     [SYSTEM_STATUS_TABLE+2]=[SYSTEM_STATUS_TABLE+2]-1;
 endif;
-[57*512 + user_area_pg]=[57*512 + user_area_pg]+1;
+[MEMORY_FREE_LIST + user_area_pg]=[MEMORY_FREE_LIST + user_area_pg]+1;
 
 //8. Set the SP to the start of the user area page to intialize the kernel stack of the new process.
 SP=user_area_pg*512 -1;
@@ -84,12 +84,18 @@ multipush(R0,R1,R2,R3,PTBR,PTLR);
 [PTBR+7]="0000";
 
 //STACK
+multipush(PTBR);
 R1=1;
 call MOD_2;//get free page
+
+multipop(PTBR);
 [PTBR+16] = R0;
 [PTBR+17] = "0110";
+multipush(PTBR);
 R1=1;
 call MOD_2;//get free page
+
+multipop(PTBR);
 [PTBR+18] = R0;
 [PTBR+19] = "0110";
 
@@ -107,9 +113,9 @@ multipop(R0,R1,R2,R3,PTBR,PTLR);
 [PTBR+15] = "0000"; 
 
 multipush(R0,R1,R2,R3,R4,PTBR,PTLR);
-breakpoint;
 R1=5;
-R2=[59*512 + file_index*16 + 8]; //1st code block number from the inode table using file_index
+R2=[INODE_TABLE + file_index*16 + 8]; //1st code block number from the inode table using file_index
+R3=[SYSTEM_STATUS_TABLE+1];
 call MOD_2; //Get Code Pg fn in MEMORY MANAGER MODULE
 [PTBR+8] = R0;
 [PTBR+9] = "0100";
@@ -121,10 +127,10 @@ multipop(R0,R1,R2,R3,R4,PTBR,PTLR);
 [DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+1]=-1;
 [DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+2]=-1;
 [DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+3]=-1;
-[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+4]=[59*512 + file_index*16 + 8];
-[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+5]=[59*512 + file_index*16 + 9];
-[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+6]=[59*512 + file_index*16 + 10];
-[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+7]=[59*512 + file_index*16 + 11];
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+4]=[INODE_TABLE + file_index*16 + 8];
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+5]=[INODE_TABLE + file_index*16 + 9];
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+6]=[INODE_TABLE + file_index*16 + 10];
+[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+7]=[INODE_TABLE + file_index*16 + 11];
 [DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+8]=-1;
 [DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+9]=-1;
 
@@ -138,6 +144,6 @@ SP=8*512;
 
 //13. Change SP to user stack, change the MODE FLAG back to user mode and return to user mode.
 [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE+1]*16)+9] = 0;
-
+BP=SP-1;
 
 ireturn;

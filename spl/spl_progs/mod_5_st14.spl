@@ -47,6 +47,7 @@ if([new_process_table +4] == CREATED) then //nothing to restore
         [new_process_table + 4] = RUNNING;
         SP = [new_process_table + 13];
 	[new_process_table + 9] =0;
+	BP=(8*512) - 1;
         ireturn;
 endif;
 //else: Set the state of the new process as RUNNING
