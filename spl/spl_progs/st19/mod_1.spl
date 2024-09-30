@@ -42,13 +42,13 @@ endif;
 //Free  Page Table
 if(fnno==4) then
     //i)    Invalidate the page table entries for the library pages by setting page number as -1 and auxiliary data as "0000" for each entry.
-    [PAGE_TABLE_BASE+20*PID+0]=-1;
-    [PAGE_TABLE_BASE+20*PID+1]="0000";
-    [PAGE_TABLE_BASE+20*PID+2]=-1;
-    [PAGE_TABLE_BASE+20*PID+3]="0000";
+    [[PROCESS_TABLE + PID * 16 + 14] +0]=-1;
+    [[PROCESS_TABLE + PID * 16 + 14] +1]="0000";
+    [[PROCESS_TABLE + PID * 16 + 14] +2]=-1;
+    [[PROCESS_TABLE + PID * 16 + 14] +3]="0000";
     //ii) For each valid entry in the page table, release the page by invoking the Release Page function and invalidate the entry.
     R3=4;
-    R4=PAGE_TABLE_BASE+20*PID;
+    R4=[PROCESS_TABLE + PID * 16 + 14];
     while(R3<20) do
         if([R4+R3]!=-1) then
             multipush(R0,R1,R2,R3,R4);
@@ -65,7 +65,7 @@ if(fnno==4) then
     //heap and stack entries in disk map table of process
     R4=2;
     R5=PID;
-    while(R3<=3) do
+    while(R4<=3) do
         if([DISK_MAP_TABLE+PID*10+R4]!=-1) then //heap
             multipush(R0,R1,R2,R3,R4,R5);
             R3=R5;

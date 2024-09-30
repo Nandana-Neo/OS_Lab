@@ -59,7 +59,7 @@ endif;
 
 //RELEASE BLOCK fn: 4
 if(fnno == 4)   then
-    [DISK_FREE_LIST+R2]=0;
+    [DISK_FREE_LIST+R2]=[DISK_FREE_LIST+R2]-1;
     return;
 endif;
 

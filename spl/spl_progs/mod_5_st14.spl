@@ -16,7 +16,7 @@ process_table_entry = PROCESS_TABLE + currentPID*16;
 //scheduling algo
 alias newPID R2;
 newPID=currentPID+1;
-newPID = newPID%15;
+newPID = newPID%16;
 while(newPID != currentPID) do
 	if(newPID!=0) then
 		if([PROCESS_TABLE + newPID*16 + 4]==READY)  then
@@ -28,7 +28,7 @@ while(newPID != currentPID) do
 
 	endif;
 	newPID = newPID+1;
-	newPID = newPID%15;
+	newPID = newPID%16;
 endwhile;
 if(newPID == currentPID) then
 	newPID = 0;//idle

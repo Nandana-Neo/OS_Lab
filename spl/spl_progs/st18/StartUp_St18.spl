@@ -51,8 +51,8 @@ PTLR=10;
 [PROCESS_TABLE + 12] = 0; //KPTR
 
 //PER PROCEESS RESOURCE TABLE
-R1=82*512+496;    //496=511-16+1
-while(R1<=82*512+511) do
+R1=82*512-16;    //496=511-16+1
+while(R1<82*512) do
     [R1]=-1;
     R1=R1+1;
 endwhile;
