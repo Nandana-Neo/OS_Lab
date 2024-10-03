@@ -1,0 +1,162 @@
+nandana@nandana-hplaptop:~/myexpos/xsm$ ./xsm --timer 1000 --debug
+TIMER
+Give:
+ll.xsm
+TIMER
+TIMER
+Previous instruction at IP = 22944: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22946, Page No. = 44: RET
+
+debug> r
+R0: 76	R1: 5	R2: 72	R3: 76	R4: 	
+R5: 	R6: 	R7: 	R8: 	R9: 	
+R10: 	R11: 	R12: 	R13: 	R14: 	
+R15: 	R16: 28692	R17: 3	R18: 	R19: 	
+P0: ll.xsm	P1: TIMER	P2: 	P3: 	
+BP: 4107	SP: 40967	IP: 22946	PTBR: 29716	PTLR: 10	
+EIP: 	EC: 	EPN: 	EMA: 	
+
+debug> dmt
+Heap 1 in Disk: -1	Heap 2 in Disk: -1
+Code 1 in Disk: -1	Code 2 in Disk: -1
+Code 3 in Disk: -1	Code 4 in Disk: -1
+Stack 1 in Disk: -1	Stack 2 in Disk: -1
+
+debug> pt
+VIRT: 0		PHY: 63		AUX: 0100	
+VIRT: 1		PHY: 64		AUX: 0100	
+VIRT: 2		PHY: -1		AUX: 0000	
+VIRT: 3		PHY: -1		AUX: 0000	
+VIRT: 4		PHY: -1		AUX: 0000	
+VIRT: 5		PHY: -1		AUX: 0000	
+VIRT: 6		PHY: -1		AUX: 0000	
+VIRT: 7		PHY: -1		AUX: 0000	
+VIRT: 8		PHY: 65		AUX: 0110	
+VIRT: 9		PHY: 66		AUX: 0110	
+
+debug> c
+3
+TIMER
+Previous instruction at IP = 1024: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 1026, Page No. = 2: MOV R16,28672
+
+debug> r
+R0: 1024	R1: 1	R2: Heapset	R3: 0	R4: -1	
+R5: Heapset	R6: 33302	R7: 	R8: 	R9: 	
+R10: 	R11: 	R12: 	R13: 	R14: 	
+R15: 	R16: 28697	R17: 16	R18: 16	R19: 	
+P0: 3	P1: TIMER	P2: 	P3: 	
+BP: 4111	SP: 4111	IP: 1026	PTBR: 29716	PTLR: 10	
+EIP: 82	EC: 0	EPN: 2	EMA: 	
+
+debug> dmt
+Heap 1 in Disk: -1	Heap 2 in Disk: -1
+Code 1 in Disk: 72	Code 2 in Disk: 73
+Code 3 in Disk: -1	Code 4 in Disk: -1
+Stack 1 in Disk: -1	Stack 2 in Disk: -1
+
+debug> pt
+VIRT: 0		PHY: 63		AUX: 0100	
+VIRT: 1		PHY: 64		AUX: 0100	
+VIRT: 2		PHY: -1		AUX: 0000	
+VIRT: 3		PHY: -1		AUX: 0000	
+VIRT: 4		PHY: 76		AUX: 0100	
+VIRT: 5		PHY: -1		AUX: 0000	
+VIRT: 6		PHY: -1		AUX: 0000	
+VIRT: 7		PHY: -1		AUX: 0000	
+VIRT: 8		PHY: 65		AUX: 0110	
+VIRT: 9		PHY: 66		AUX: 0110	
+
+debug> c
+TIMER
+TIMER
+TIMER
+TIMER
+TIMER
+TIMER
+TIMER
+TIMER
+TIMER
+TIMER
+TIMER
+TIMER
+TIMER
+TIMER
+12
+TIMER
+13
+TIMER
+14
+TIMER
+12
+Previous instruction at IP = 1024: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 1026, Page No. = 2: MOV R16,28672
+
+debug> r
+R0: 1032	R1: 4	R2: 4102	R3: 0	R4: -2	
+R5: 12	R6: 33300	R7: 5	R8: 	R9: 	
+R10: 	R11: 	R12: 	R13: 	R14: 	
+R15: 	R16: 28697	R17: 16	R18: 16	R19: 	
+P0: 14	P1: 12	P2: 	P3: 	
+BP: 4098	SP: 4104	IP: 1026	PTBR: 29716	PTLR: 10	
+EIP: 2560	EC: 0	EPN: 5	EMA: 	
+
+debug> dmt
+Heap 1 in Disk: -1	Heap 2 in Disk: -1
+Code 1 in Disk: 72	Code 2 in Disk: 73
+Code 3 in Disk: -1	Code 4 in Disk: -1
+Stack 1 in Disk: -1	Stack 2 in Disk: -1
+
+debug> pt
+VIRT: 0		PHY: 63		AUX: 0100	
+VIRT: 1		PHY: 64		AUX: 0100	
+VIRT: 2		PHY: 77		AUX: 1110	
+VIRT: 3		PHY: 78		AUX: 1110	
+VIRT: 4		PHY: 76		AUX: 0100	
+VIRT: 5		PHY: -1		AUX: 0000	
+VIRT: 6		PHY: -1		AUX: 0000	
+VIRT: 7		PHY: -1		AUX: 0000	
+VIRT: 8		PHY: 65		AUX: 0110	
+VIRT: 9		PHY: 66		AUX: 0110	
+
+debug> c
+TIMER
+Previous instruction at IP = 22944: BRKP
+Mode: KERNEL 	 PID: 1
+Next instruction at IP = 22946, Page No. = 44: RET
+
+debug> r
+R0: 79	R1: 5	R2: 73	R3: 79	R4: 	
+R5: 	R6: 	R7: 	R8: 	R9: 	
+R10: 	R11: 	R12: 	R13: 	R14: 	
+R15: 	R16: 28692	R17: 3	R18: 	R19: 	
+P0: 14	P1: TIMER	P2: 	P3: 	
+BP: 4098	SP: 40986	IP: 22946	PTBR: 29716	PTLR: 10	
+EIP: 2560	EC: 0	EPN: 5	EMA: 	
+
+debug> dmt
+Heap 1 in Disk: -1	Heap 2 in Disk: -1
+Code 1 in Disk: 72	Code 2 in Disk: 73
+Code 3 in Disk: -1	Code 4 in Disk: -1
+Stack 1 in Disk: -1	Stack 2 in Disk: -1
+
+debug> pt
+VIRT: 0		PHY: 63		AUX: 0100	
+VIRT: 1		PHY: 64		AUX: 0100	
+VIRT: 2		PHY: 77		AUX: 1110	
+VIRT: 3		PHY: 78		AUX: 1110	
+VIRT: 4		PHY: 76		AUX: 0100	
+VIRT: 5		PHY: -1		AUX: 0000	
+VIRT: 6		PHY: -1		AUX: 0000	
+VIRT: 7		PHY: -1		AUX: 0000	
+VIRT: 8		PHY: 65		AUX: 0110	
+VIRT: 9		PHY: 66		AUX: 0110	
+
+debug> c
+13
+14
+Over
+Machine is halting.

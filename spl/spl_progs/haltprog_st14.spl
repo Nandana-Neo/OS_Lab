@@ -21,6 +21,6 @@ while(pid <=  15)  do
 endwhile;
  
 
-print "Exc";
+print "Over";
 
 halt;
