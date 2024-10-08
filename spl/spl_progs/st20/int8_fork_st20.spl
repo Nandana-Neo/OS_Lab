@@ -1,0 +1,32 @@
+//Mode flag
+[PROCESS_TABLE+[SYSTEM_STATUS_TABLE+1]*16+9]=8;
+
+//switch to kernel mode
+alias userSP R0;
+userSP = SP;
+[PROCESS_TABLE + ([SYSTEM_STATUS_TABLE +1] * 16) +13] =userSP;
+SP = [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE+1] * 16) + 11]* 512 -1;
+
+//Get PCB entry from memory manager module
+R1=GET_PCB_ENTRY;
+call PROCESS_MANAGER; //Process Manager
+
+//returns index of child
+alias childPID R0;
+
+//Get Pcb Entry returns -1
+if(childPID==-1) then
+    //store -1 as the return value in the stack,
+
+    // reset the MODE FLAG (to 0), 
+    [PROCESS_TABLE+[SYSTEM_STATUS_TABLE+1]*16+9]=0;
+    //switch to user stack and 
+    SP=[PROCESS_TABLE+([SYSTEM_STATUS_TABLE+1]*16) + 13];
+    //return to the user mode from the fork system call
+    ireturn;
+endif;
+
+//if heap pages not allocated
+if([PAGE_TABLE_BASE + 20*[SYSTEM_STATUS_TABLE+1] + 4] == -1) then
+    
+endif;

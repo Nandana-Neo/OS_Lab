@@ -26,7 +26,7 @@ if(EC!=0)   then
     R1=3;
     R2=[SYSTEM_STATUS_TABLE+1];
     call MOD_1; //Exit process fn in PROCESS MANAGER
-    halt;
+    call MOD_5;
 endif;
 
 
