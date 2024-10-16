@@ -1,0 +1,39 @@
+alias userSP R1;
+userSP = SP;
+
+//switch to kernel stack
+alias pt_sst R2;
+pt_sst = PROCESS_TABLE + ([SYSTEM_STATUS_TABLE +1] * 16);
+[pt_sst + 13] = SP;
+SP = [pt_sst + 11]*512 - 1;
+
+//extract syscall no
+alias syscall_no R3;
+R3 = userSP -5;
+syscall_no = [[PTBR + (R3/512)*2]*512 + (R3%512) ];
+
+//mode FLAG
+[pt_sst + 9] = syscall_no;
+
+//SEMLOCK -- 19
+if(syscall_no == INT_SEMLOCK) then
+    //extract sem desc
+    alias sem_desc R4;
+    sem_desc = [[PTBR + ((userSP - 4)/512)*2]*512 + (userSP - 4)%512];
+    
+    //if sem desc is invalid OR if sem id field in pprt is not a semaphore, return -1
+    if(sem_desc<0 || sem_desc>7 || [[pt_sst + 11]*512 + RESOURCE_TABLE_OFFSET + sem_desc*2] != SEMAPHORE) then
+        [[PTBR + ((userSP -1)/512)*2]*512 + (userSP -1)%512] = -1; //RETURN
+        [pt_sst + 9] = 0; // mode flag reset
+        SP = userSP;//switch to user stack
+        ireturn;
+    endif;
+
+    
+endif;
+
+// //mode flag reset
+// [pt_sst + 9]=0;
+// //switch to user stack
+// SP=userSP;
+ireturn;
