@@ -96,7 +96,7 @@ if(fnno==5) then
     multipop(R0,R1,R2,R3);
 
     R0=R3;//returning pg no
-    breakpoint;
+    
     return;
 endif;
 

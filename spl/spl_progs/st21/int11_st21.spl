@@ -72,7 +72,7 @@ endif;
 if(syscall == 14) then 
     [pt_sst + 9] = 14; //Mode flag
     R1 = PROCESS_TABLE + 0;
-    R6 = PROCESS_TABLE + 15*16;
+    R6 = PROCESS_TABLE + (MAX_PROC_NUM-1)*16;
     //LOOP thru all process and find if any are waiting for this process
     while(R1<=R6) do
         if([R1 + 4] == WAIT_PROCESS && [R1 + 5] == [SYSTEM_STATUS_TABLE + 1]) then

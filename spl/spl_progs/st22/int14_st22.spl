@@ -1,3 +1,4 @@
+breakpoint;
 alias userSP R1;
 userSP = SP;
 
@@ -104,6 +105,8 @@ if(syscall_no == INT_SEMUNLOCK) then
     [pt_sst + 9]=0;
     //switch to user stack
     SP=userSP;
+    //return
+    [[PTBR + ((userSP -1)/512)*2]*512 + (userSP -1)%512] = 0; //RETURN
 ireturn;
 endif;
 
