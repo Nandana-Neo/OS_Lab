@@ -31,16 +31,16 @@ if(childPID==-1) then
 endif;
 
 //if heap pages not allocated
-if([PAGE_TABLE_BASE + 20*[SYSTEM_STATUS_TABLE+1] + 4] == -1) then
+if([PTBR+ 4] == -1) then
     multipush(R0,R1,R2,R3);
     R1=1;
     call MOD_2; //Get free pg fn of MEMORY MANAGER MOD
-    [PAGE_TABLE_BASE+[SYSTEM_STATUS_TABLE+1]*20+4]=R0;
-    [PAGE_TABLE_BASE+[SYSTEM_STATUS_TABLE+1]*20+5]="1110";
+    [PTBR+4]=R0;
+    [PTBR+5]="1110";
     R1=1;
     call MOD_2; //Get free pg fn of MEMORY MANAGER MOD
-    [PAGE_TABLE_BASE+[SYSTEM_STATUS_TABLE+1]*20+6]=R0;
-    [PAGE_TABLE_BASE+[SYSTEM_STATUS_TABLE+1]*20+7]="1110";
+    [PTBR+6]=R0;
+    [PTBR+7]="1110";
     multipop(R0,R1,R2,R3);
 endif;
 
@@ -85,38 +85,51 @@ R6=PROCESS_TABLE + childPID*16;
 
 ///PER PROCESS RESOURCE TABLE
 //Copy the resource TABLE
-
-
+R5=[R6+ 11]*512 + RESOURCE_TABLE_OFFSET;
+R4=[PROCESS_TABLE + [SYSTEM_STATUS_TABLE+1]*16 + 11]*512 + RESOURCE_TABLE_OFFSET;
+R7=[PROCESS_TABLE + [SYSTEM_STATUS_TABLE+1]*16 + 11]*512 + 512;
+while(R4<R7) do
+    [R5] = [R4];
+    [R5+1] = [R4+1];
+    if([R5]==SEMAPHORE) then
+        [SEMAPHORE_TABLE + [R5+1]*4 + 1] = [SEMAPHORE_TABLE + [R5+1]*4 + 1] +1;
+    endif;
+    R4=R4+2;
+    R5=R5+2;
+endwhile;
 ///PER PROCESS DISK MAP TABLE
 R4=0;
 while(R4<16) do
-    [DISK_MAP_TABLE + childPID*16 + R4] = [DISK_MAP_TABLE + ([SYSTEM_STATUS_TABLE +1] * 16) + R4];
+    [DISK_MAP_TABLE + childPID*10 + R4] = [DISK_MAP_TABLE + ([SYSTEM_STATUS_TABLE +1] * 10) + R4];
     R4=R4+1;
 endwhile;
 
 ///PAGE TABLE
 R4=0;
+alias newPTBR R7;
+newPTBR=PAGE_TABLE_BASE + childPID*20;
 while(R4<16) do
-    [PAGE_TABLE_BASE+childPID*20 + R4]=[PAGE_TABLE_BASE+[SYSTEM_STATUS_TABLE+1]*20 + R4];
-    if(R4%2==0) then
-        [MEMORY_FREE_LIST+[PAGE_TABLE_BASE+childPID*20 + R4]]=[MEMORY_FREE_LIST+[PAGE_TABLE_BASE+childPID*20 + R4]]+1;
+    [newPTBR + R4]=[PTBR + R4];
+    [newPTBR + R4 + 1]=[PTBR + R4+1];
+    if([newPTBR+R4]!=-1) then
+        [MEMORY_FREE_LIST+[newPTBR + R4]]=[MEMORY_FREE_LIST+[newPTBR + R4]]+1;
     endif;
-    R4=R4+1;
+    R4=R4+2;
 endwhile;
 
 ///Copy user stack pages word by word
 R4=0;
 alias cst R5;
 alias pst R6;
-R5=[PAGE_TABLE_BASE+childPID*20+16]*512;
-R6=[PAGE_TABLE_BASE+[SYSTEM_STATUS_TABLE+1]*20 + 16]*512;
+R5=[newPTBR+16]*512;
+R6=[PTBR + 16]*512;
 while(R4<512) do
     [R5+R4]=[R6+R4];
     R4=R4+1;
 endwhile;
 R4=0;
-R5=[PAGE_TABLE_BASE+childPID*20+18]*512;
-R6=[PAGE_TABLE_BASE+[SYSTEM_STATUS_TABLE+1]*20 + 18]*512;
+R5=[newPTBR+18]*512;
+R6=[PTBR + 18]*512;
 while(R4<512) do
     [R5+R4]=[R6+R4];
     R4=R4+1;
@@ -127,8 +140,8 @@ endwhile;
 
 //Return values
 R1 = userSP -1;
-[[PAGE_TABLE_BASE + 20*[SYSTEM_STATUS_TABLE+1] + (R1/512)*2]*512 + (R1%512) ]= childPID;//parent
-[[PAGE_TABLE_BASE + 20*childPID + (R1/512)*2]*512 + (R1%512) ]= 0;//child
+[[PTBR + (R1/512)*2]*512 + (R1%512) ]= childPID;//parent
+[[newPTBR + (R1/512)*2]*512 + (R1%512) ]= 0;//child
 
 //Mode flag
 [PROCESS_TABLE+[SYSTEM_STATUS_TABLE+1]*16+9]=0;

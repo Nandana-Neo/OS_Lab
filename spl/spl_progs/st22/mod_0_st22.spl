@@ -67,6 +67,7 @@ if(fnno == ACQUIRE_SEMAPHORE) then
 	while(sem_i < MAX_SEM_COUNT) do
 		if([SEMAPHORE_TABLE + sem_i*4 + 1] == 0) then
 			break;
+		endif;
 		sem_i = sem_i+1;
 	endwhile;
 

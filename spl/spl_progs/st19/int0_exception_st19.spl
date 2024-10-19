@@ -23,6 +23,9 @@ if(EC!=0)   then
     multipop(EIP);
     restore; //unnecessary
     print "ERROR";
+    print EC;
+    print EIP;
+    print EPN;
     R1=3;
     R2=[SYSTEM_STATUS_TABLE+1];
     call MOD_1; //Exit process fn in PROCESS MANAGER
