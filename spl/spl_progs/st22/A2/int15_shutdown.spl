@@ -1,0 +1,7 @@
+print "memory:";
+print [SYSTEM_STATUS_TABLE + 6];
+print "disk:";
+print [SYSTEM_STATUS_TABLE + 7];
+print "context:";
+print [TERMINAL_STATUS_TABLE + 2];
+halt;
