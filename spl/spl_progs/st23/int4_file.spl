@@ -1,0 +1,90 @@
+alias userSP R1;
+userSP = SP;
+
+//switch to kernel stack
+alias pt_sst R2;
+pt_sst = PROCESS_TABLE + ([SYSTEM_STATUS_TABLE +1] * 16);
+[pt_sst + 13] = SP;
+SP = [pt_sst + 11]*512 - 1;
+
+//extract syscall no
+alias syscall_no R3;
+R3 = userSP -5;
+syscall_no = [[PTBR + (R3/512)*2]*512 + (R3%512) ];
+
+//mode FLAG
+[pt_sst + 9] = syscall_no;
+
+//Create -1
+if(syscall_no == INT_CREATE) then
+    
+    alias  file_name R4;
+    file_name = [[PTBR + ((userSP-4)/512)*2]*512 + (userSP-4)%512 ];
+    alias permissions R5;
+    file_name = [[PTBR + ((userSP-3)/512)*2]*512 + (userSP-3)%512 ];
+    
+    //if file present in system(check  inode table) => return 0
+    alias inode_table_i R6;
+    inode_table_i = 0;
+    while(inode_table_i< MAX_FILE_NUM) do
+        if([INODE_TABLE + inode_table_i*16 + 1]==file_name) then //already present
+            [[PTBR + ((userSP -1)/512)*2]*512 + (userSP -1)%512] = 0; //RETURN value
+            [pt_sst + 9] = 0;//mode flag reset
+            SP = userSP;//switch to user stack
+            ireturn;
+        endif;
+        inode_table_i = inode_table_i + 1;
+    endwhile;
+
+    //find free entry in inode table
+    inode_table_i = 0;
+    while(inode_table_i< MAX_FILE_NUM) do
+        if([INODE_TABLE + inode_table_i*16 + 1]==-1) then
+            break;
+        endif;
+        inode_table_i = inode_table_i + 1;
+    endwhile;
+
+    //if no free entry, return -1
+    if(inode_table_i == MAX_FILE_NUM) then
+        [[PTBR + ((userSP -1)/512)*2]*512 + (userSP -1)%512] = -1; //RETURN value
+        [pt_sst + 9] = 0;//mode flag reset
+        SP = userSP;//switch to user stack
+        ireturn;
+    endif;
+
+    //In the Inode Table entry found above, set FILE NAME to the given file name, FILE SIZE to 0 and FILE TYPE to DATA.
+    R7=INODE_TABLE + inode_table_i*16 ;
+    [R7 + 1] = file_name;   //name
+    [R7 + 2] = 0;           //size
+    [R7 + 0] = DATA;        //type
+    //Set block nos to-1 -- no blocks allocated yet
+    [R7 + 8] = -1;
+    [R7 + 9] = -1;
+    [R7 + 10] = -1;
+    [R7 + 11] = -1;
+    //Set userid
+    [R7 + 3] = [pt_sst + 3];
+    //Set permissions
+    [R7 + 4] = permissions;
+
+    //Root file parameters
+    R8=ROOT_FILE + inode_table_i*8 ;
+    [R8 + 0] = filename; //name
+    [R8 + 1] = 0; //size
+    [R8 + 2] = DATA; //type
+    [R8 + 3] = [USER_TABLE + 2*[pt_sst + 3]];//username
+    [R8 + 4] = permissions;
+    
+    //Return 0
+    [[PTBR + ((userSP -1)/512)*2]*512 + (userSP -1)%512] = 0; //RETURN value -- success
+    [pt_sst + 9] = 0;//mode flag reset
+
+    SP = userSP;//switch to user stack
+    ireturn;
+endif;
+
+//delete - 4
+if(syscall_no == INT_DELETE) then
+    
+endif;
