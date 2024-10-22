@@ -21,7 +21,7 @@ currentPID = [SYSTEM_STATUS_TABLE + 1];
 
 
 //to check
-print "TIMER";
+//print "TIMER";
 
 //call scheduler
 call MOD_5;

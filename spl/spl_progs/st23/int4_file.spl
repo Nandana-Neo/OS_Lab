@@ -15,11 +15,12 @@ syscall_no = [[PTBR + (R3/512)*2]*512 + (R3%512) ];
 //mode FLAG
 [pt_sst + 9] = syscall_no;
 
+alias  file_name R4;
+file_name = [[PTBR + ((userSP-4)/512)*2]*512 + (userSP-4)%512 ];
+
 //Create -1
 if(syscall_no == INT_CREATE) then
     
-    alias  file_name R4;
-    file_name = [[PTBR + ((userSP-4)/512)*2]*512 + (userSP-4)%512 ];
     alias permissions R5;
     file_name = [[PTBR + ((userSP-3)/512)*2]*512 + (userSP-3)%512 ];
     
@@ -70,7 +71,7 @@ if(syscall_no == INT_CREATE) then
 
     //Root file parameters
     R8=ROOT_FILE + inode_table_i*8 ;
-    [R8 + 0] = filename; //name
+    [R8 + 0] = file_name; //name
     [R8 + 1] = 0; //size
     [R8 + 2] = DATA; //type
     [R8 + 3] = [USER_TABLE + 2*[pt_sst + 3]];//username
@@ -86,5 +87,99 @@ endif;
 
 //delete - 4
 if(syscall_no == INT_DELETE) then
+    //find indexof file in  inode table
+    alias inode_table_i R5;
+    inode_table_i = 0;
+    while(inode_table_i< MAX_FILE_NUM) do
+        if([INODE_TABLE + inode_table_i*16 + 1]==file_name) then
+            break;
+        endif;
+        inode_table_i = inode_table_i + 1;
+    endwhile;
+
+    //if file not present return 0 -- Success
+    if(inode_table_i == MAX_FILE_NUM) then
+        [[PTBR + ((userSP -1)/512)*2]*512 + (userSP -1)%512] = 0; //RETURN value
+        [pt_sst + 9] = 0;//mode flag reset
+        SP = userSP;//switch to user stack
+        ireturn;
+    endif;
+    //if file not  data file, return -1
+    if([INODE_TABLE + inode_table_i*16 + 0] != DATA) then
+        [[PTBR + ((userSP-1)/512)*2]*512 + (userSP-1)%512] = -1; //RETURN value
+        [pt_sst + 9] = 0; //mode falg
+        SP = userSP;//switch to user stack
+        ireturn;
+    endif;
+
+    //if exclusive permission
+    if([INODE_TABLE + inode_table_i*16 + 4] == EXCLUSIVE) then
+        //if the current user is not root and the current user does not own the file return -1
+        if(([pt_sst + 3]!=ROOT)  && ([pt_sst + 3] != [INODE_TABLE + inode_table_i*16 + 3]))  then
+            [[PTBR + ((userSP-1)/512)*2]*512 + (userSP-1)%512] = -1; //RETURN value
+            [pt_sst + 9] = 0; //mode falg
+            SP = userSP;//switch to user stack
+            ireturn;
+        endif;
+    endif;
+
+    //Acquire lock
+    multipush(R1,R2,R3,R4,R5);
+    R1=ACQUIRE_INODE;//FN NO 4
+    R2=inode_table_i;
+    R3=[SYSTEM_STATUS_TABLE + 1]; //pid
+    call RESOURCE_MANAGER; //MOD 0
+    multipop(R1,R2,R3,R4,R5);
+
+    //check if file open count is  -1 -- else-- release lock and return -2
+    if([FILE_STATUS_TABLE + inode_table_i*4 + 1] !=-1) then
+        multipush(R1,R2,R3,R4,R5);
+        R1=RELEASE_INODE;//FN NO 5
+        R2=inode_table_i;
+        R3=[SYSTEM_STATUS_TABLE + 1]; //pid
+        call RESOURCE_MANAGER; //MOD 0
+        multipop(R1,R2,R3,R4,R5);
+        [[PTBR + ((userSP-1)/512)*2]*512 + (userSP-1)%512] = -2; //RETURN value
+        [pt_sst + 9] = 0; //mode falg
+        SP = userSP;//switch to user stack
+        ireturn;
+    endif;
+
+    //release each  of the blocks allocated (check  buffer table also)
+    R6=0;
+    while(R6<4) do
+        R7=[INODE_TABLE + inode_table_i*16 + 8 + R6];//disk  no
+        if(R7!= -1) then
+            //reset buffer  table
+            if([BUFFER_TABLE + (R7%4)*4]==R7) then
+                [BUFFER_TABLE + (R7%4)*4 + 1] = 0;
+            endif;
+            //release block
+            multipush(R1,R2,R3,R4,R5,R6,R7);
+            R1 = RELEASE_BLOCK; //fn no 4
+            R2 = R7;    //block no
+            R3 = [SYSTEM_STATUS_TABLE + 1]; //pid
+            call MEMORY_MANAGER; //MOD 2
+            multipop(R1,R2,R3,R4,R5,R6,R7);
+        endif;
+        R6=R6+1;
+    endwhile;
+    //invalidate inode table
+    [INODE_TABLE + inode_table_i*16 + 1] = -1;
+
+    //invalidate root file
+    [ROOT_FILE + inode_table_i*8 + 0] = -1;
+
+    //release lock
+    multipush(R1,R2,R3,R4,R5);
+    R1=RELEASE_INODE;//FN NO 5
+    R2=inode_table_i;
+    R3=[SYSTEM_STATUS_TABLE + 1]; //pid
+    call RESOURCE_MANAGER; //MOD 0  
+    multipop(R1,R2,R3,R4,R5);
     
+    [[PTBR + ((userSP-1)/512)*2]*512 + (userSP-1)%512] = -1; //RETURN value
+    [pt_sst + 9] = 0; //mode flag
+    SP = userSP;//switch to user stack
+    ireturn;
 endif;
