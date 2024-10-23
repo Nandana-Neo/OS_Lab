@@ -1,0 +1,10 @@
+---------------------Before---------------------
+Filename: root 	 Filesize 512
+Filename: filec.xsm 	 Filesize 348
+Filename: file2.xsm 	 Filesize 360
+Filename: d2.dat 	 Filesize 3
+Filename: empty.dat 	 Filesize 0
+----------------------After---------------------
+Filename: root 	 Filesize 512
+Filename: filec.xsm 	 Filesize 348
+Filename: file2.xsm 	 Filesize 360

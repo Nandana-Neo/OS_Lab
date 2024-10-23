@@ -1,0 +1,75 @@
+------------------------------Initially---------------------------------
+Filename: root 	 Filesize 512
+Filename: filec.xsm 	 Filesize 348
+Filename: filed.xsm 	 Filesize 360
+Filename: d2.dat 	 Filesize 3
+Filename: empty.dat 	 Filesize 0
+
+---------------------------------xsm-----------------------------------
+Commands executed in xsm  is as follows:
+./xsm --timer 1000
+---Enter---
+filed.xsm
+Enter file:
+d2.dat
+Deleting..
+Done
+---Enter---
+filed.xsm
+Enter file:
+empty.dat
+Deleting..
+Done
+---Enter---
+filed.xsm
+Enter file:
+filec.xsm
+Deleting..
+P Denied
+---Enter---
+Shutdown
+Machine is halting.
+
+// Note-- For inode table and rootfile invalid entry is denoted by filename being -1
+// Also, using  disk free list we can see clearly that the blocks for d2.dat was released
+
+--------------------------------ls in xfs-interface --------------------------------
+Filename: root 	 Filesize 512
+Filename: filec.xsm 	 Filesize 348
+Filename: filed.xsm 	 Filesize 360
+
+------------------------------------xsm--------------------------------------------
+//Again running:
+---Enter---
+filec.xsm
+Enter file:
+hi.dat
+Permission:
+1
+Creating..
+Done
+---Enter---
+Shutdown
+Machine is halting.
+
+---------------------------------------ls in xfs-interface----------------------------------
+Filename: root 	 Filesize 512
+Filename: filec.xsm 	 Filesize 348
+Filename: filed.xsm 	 Filesize 360
+Filename: hi.dat 	 Filesize 0
+
+-----------------------------------------xsm--------------------------------------------------------
+---Enter---
+filed.xsm
+Enter file:
+hi.dat 
+Deleting..
+Done
+---Enter---
+Shutdown        
+Machine is halting.
+
+-----------------------------------------ls in xfs-interface ------------------------------------
+Filename: root 	 Filesize 512
+Filename: filec.xsm 	 Filesize 348
+Filename: filed.xsm 	 Filesize 360
