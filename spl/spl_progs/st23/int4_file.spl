@@ -22,7 +22,7 @@ file_name = [[PTBR + ((userSP-4)/512)*2]*512 + (userSP-4)%512 ];
 if(syscall_no == INT_CREATE) then
     
     alias permissions R5;
-    file_name = [[PTBR + ((userSP-3)/512)*2]*512 + (userSP-3)%512 ];
+    permissions = [[PTBR + ((userSP-3)/512)*2]*512 + (userSP-3)%512 ];
     
     //if file present in system(check  inode table) => return 0
     alias inode_table_i R6;

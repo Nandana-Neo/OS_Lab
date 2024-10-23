@@ -8,6 +8,7 @@ alias currentPID R2;
 if(fnno == ACQUIRE_INODE) then
 	alias inode_i R2;
 	alias PID R3;
+
 	//while inode is locked
 	while([FILE_STATUS_TABLE  + inode_i*4] >= 0) do
 		[PROCESS_TABLE + PID*16 + 4] = WAIT_FILE;
@@ -16,8 +17,9 @@ if(fnno == ACQUIRE_INODE) then
 		call MOD_5; //SCHEDULER
 		multipop(R1,R2,R3);
 	endwhile;
-	//if inode becomes invalid -- deleted
-	if([FILE_STATUS_TABLE  + inode_i*4 + 1] == -1) then
+
+	//if inode becomes invalid -- deleted (Check inode table)
+	if([INODE_TABLE  + inode_i*16 + 1] == -1) then
 		R0 = -1;
 		return;
 	endif;
@@ -28,7 +30,32 @@ endif;
 
 if(fnno == RELEASE_INODE) then
 	alias inode_i R2;
-	alias 
+	alias PID R3;
+
+	//If given PID is not Locking PID in File Status Table
+	if(PID != [FILE_STATUS_TABLE + inode_i*4]) then
+		R0  =  -1;
+		return;
+	endif;
+
+	//Free lock
+	[FILE_STATUS_TABLE + inode_i*4] = -1;
+
+	//wake up processes waiting for this inode
+	alias i R4;
+	i = PROCESS_TABLE + 4; //state
+	alias lim R5;
+	lim = PROCESS_TABLE + 15*16 +4;
+	while(i <= lim) do
+		if([i] == WAIT_FILE && [i+1] == inode_i) then
+			[i] = READY;
+			[i+1] = -1;
+		endif;
+		i =  i+16;
+	endwhile;
+
+	R0 = 0;
+	return;
 endif;
 
 if(fnno == 8) then
