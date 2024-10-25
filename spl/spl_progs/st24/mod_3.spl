@@ -112,6 +112,39 @@ endif;
 
 //CLOSE -- 4
 if(fnno == CLOSE) then
-    
+    alias open_file_table_i R2;
+    alias PID R3;
+    alias inode_i R4;
+    alias open_file_table_offset R5;
+
+    // Find the index of the Inode Table
+    open_file_table_offset = OPEN_FILE_TABLE + open_file_table_i*4;
+    inode_i = [open_file_table_offset];
+
+    // In the Open File Table Entry, decrement the Open Instance Count.
+    [open_file_table_offset+1] = [open_file_table_offset+1] -1;
+
+    // If the Open Instance Count becomes 0
+    if([open_file_table_offset+1] == 0) then
+        //     Invalidate the entry by setting all fields to -1.
+        [open_file_table_offset] = -1;
+        [open_file_table_offset+1] = -1;
+        [open_file_table_offset+2] = -1;
+        [open_file_table_offset+3] = -1;
+
+        R6 = FILE_STATUS_TABLE + inode_i*4 + 1;
+        //     If the file is not the "root", decrement the File Open Count in the File (Inode) Status Table.
+        if([INODE_TABLE + inode_i*16] != ROOT ) then
+            [R6] = [R6] - 1;
+        endif;
+        //     If the File Open Count in File Status Table becomes 0, set it to -1.
+        if([R6]==0) then
+            [R6]=-1;
+        endif;
+    endif;
+
+    // return;
+    return;
+
 endif;
 return;
