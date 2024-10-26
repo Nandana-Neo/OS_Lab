@@ -197,7 +197,7 @@ if(fnno == BUFFERED_READ) then
     endif;
 
     //Copy contents in offset location to physical address given as input
-    [address] = [(71+buffer_n)*512 + disk_offset];
+    [[[PROCESS_TABLE + [SYSTEM_STATUS_TABLE+1]*16 + 14] + 2*(address/512)]*512 + (address%512)] = [(71+buffer_n)*512 + disk_offset];
 
     //release buffer
     multipush(R1,R2,R3,R4,R5,R6);
