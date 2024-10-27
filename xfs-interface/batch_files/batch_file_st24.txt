@@ -27,4 +27,6 @@ load --os $HOME/myexpos/spl/spl_progs/st18/StartUp_St18.xsm
 load --exec $HOME/myexpos/expl/expl_progs/st23/filec.xsm
 load --exec $HOME/myexpos/expl/expl_progs/st24/read.xsm
 load --data $HOME/myexpos/expl/expl_progs/st24/sample.dat
+load --data $HOME/myexpos/expl/expl_progs/st24/numbers.dat
+load --exec $HOME/myexpos/expl/expl_progs/st24/test5.xsm
 exit
