@@ -80,7 +80,7 @@ if(syscall == INT_OPEN) then
     SP=userSP;
 
     //return index of per process resource table
-    [return_address] = (file_desc - ([pcb + 11]*512))/2;
+    [return_address] = (file_desc - ([pcb + 11]*512 + RESOURCE_TABLE_OFFSET))/2;
     ireturn;
 endif;  
 

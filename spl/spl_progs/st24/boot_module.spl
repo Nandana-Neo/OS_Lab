@@ -202,7 +202,7 @@ R2 = OPEN_FILE_TABLE + 4*32;
 while(R1<R2) do
 	[R1] = -1; 		// inode index
 	[R1+1] = 0;		// open instance count
-	[R1+2] = 0;		// lseek
+	
 	R1 = R1+4; 
 endwhile;
 
