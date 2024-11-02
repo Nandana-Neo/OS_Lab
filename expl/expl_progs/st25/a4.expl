@@ -25,8 +25,6 @@ int store(str file, int start)
 
     //Close the file
     x=exposcall("Close", fp);
-    write("Store:");
-    write(x);
 
     return 0;
   end
@@ -85,106 +83,67 @@ int merge(str out, str in1, str in2)
 
     //Close all the files
     x=exposcall("Close", fp);
-    write("Merge:");
-    write(x);
     x=exposcall("Close", fp1);
-    write("Merge:");
-    write(x);
     x=exposcall("Close", fp2);
-    write("Merge:");
-    write(x);
 
     //Delete the input files
     x=exposcall("Delete", in1);
-    write(x);
     x=exposcall("Delete", in2);
-    write(x);
-   
+    write("Done");
     return 0;
   end
 }
 
-
 int main()
 {
   decl
-    int x, pid;
+    int x, pid1, pid2, fp;
   enddecl
 
   begin
-    // Fork to create child process
-    pid = exposcall("Fork");
-    if (pid != 0) then
-      // Parent process stores numbers into "temp1.dat"
-      x = store("temp1.dat", 1);
+    pid1=exposcall("Fork");
+    if(pid1!=0) then
+      pid2=exposcall("Fork");
+      if(pid2!=0) then
+        //Store the numbers into "temp1.dat"
+        x=store("temp1.dat", 1);
 
-      // Wait for child process to finish
-      x = exposcall("Wait", pid);
+        x=exposcall("Wait", pid2);
+      else
+        //Store the numbers into "temp2.dat"
+        x=store("temp2.dat", 2);
 
-      // Merge "temp1.dat" and "temp2.dat" into "merge.dat"
-      x = merge("merge.dat", "temp1.dat", "temp2.dat");
+        x=exposcall("Exit");
+      endif;
+
+      //Merge "temp1.dat" and "temp2.dat" into "tempa.dat"
+      x=merge("tempa.dat", "temp1.dat", "temp2.dat");
+
+      x=exposcall("Wait", pid1);
     else
-      // Child process stores numbers into "temp2.dat"
-      x = store("temp2.dat", 2);
+      pid2=exposcall("Fork");
+      if(pid2!=0) then
+        //Store the numbers into "temp3.dat"
+        x=store("temp3.dat", 3);
 
-      // Exit the child process
-      x = exposcall("Exit");
+        x=exposcall("Wait", pid2);
+      else
+        //Store the numbers into "temp4.dat"
+        x=store("temp4.dat", 4);
+
+        x=exposcall("Exit");
+      endif;
+
+      //Merge "temp3.dat" and "temp4.dat" into "tempb.dat"
+      x=merge("tempb.dat", "temp3.dat", "temp4.dat");
+
+      x=exposcall("Exit");
     endif;
+
+    //Merge "tempa.dat" and "tempb.dat" into "merge.dat"
+    //which contains numbers from 1 to 2048 in sorted order
+    x=merge("merge.dat", "tempa.dat", "tempb.dat");
 
     return 1;
   end
 }
-
-// int main()
-// {
-//   decl
-//     int x, pid1, pid2, fp;
-//   enddecl
-
-//   begin
-//     pid1=exposcall("Fork");
-//     if(pid1!=0) then
-//       pid2=exposcall("Fork");
-//       if(pid2!=0) then
-//         //Store the numbers into "temp1.dat"
-//         x=store("temp1.dat", 1);
-
-//         x=exposcall("Wait", pid2);
-//       else
-//         //Store the numbers into "temp2.dat"
-//         x=store("temp2.dat", 2);
-
-//         x=exposcall("Exit");
-//       endif;
-
-//       //Merge "temp1.dat" and "temp2.dat" into "tempa.dat"
-//       x=merge("tempa.dat", "temp1.dat", "temp2.dat");
-
-//       x=exposcall("Wait", pid1);
-//     else
-//       pid2=exposcall("Fork");
-//       if(pid2!=0) then
-//         //Store the numbers into "temp3.dat"
-//         x=store("temp3.dat", 3);
-
-//         x=exposcall("Wait", pid2);
-//       else
-//         //Store the numbers into "temp4.dat"
-//         x=store("temp4.dat", 4);
-
-//         x=exposcall("Exit");
-//       endif;
-
-//       //Merge "temp3.dat" and "temp4.dat" into "tempb.dat"
-//       x=merge("tempb.dat", "temp3.dat", "temp4.dat");
-
-//       x=exposcall("Exit");
-//     endif;
-
-//     //Merge "tempa.dat" and "tempb.dat" into "merge.dat"
-//     //which contains numbers from 1 to 2048 in sorted order
-//     x=merge("merge.dat", "tempa.dat", "tempb.dat");
-
-//     return 1;
-//   end
-// }
