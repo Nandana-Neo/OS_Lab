@@ -112,7 +112,7 @@ if(syscall == INT_CLOSE) then
 
     //Get index of open file table from per process reource table
     alias open_file_table_i R7;
-    open_file_table_i=[pprt+1];
+    open_file_table_i=[pprt + file_desc_pprt*2 +1];
 
     // Call the close() function in the 
     // File Manager module with the 
