@@ -33,4 +33,8 @@ load --exec $HOME/myexpos/expl/expl_progs/st25/a1.xsm
 load --exec $HOME/myexpos/expl/expl_progs/st25/a2.xsm
 load --exec $HOME/myexpos/expl/expl_progs/st25/a3.xsm
 load --exec $HOME/myexpos/expl/expl_progs/st25/a4.xsm
+load --exec $HOME/myexpos/expl/expl_progs/st25/system_utilities/ls.xsm
+load --exec $HOME/myexpos/expl/expl_progs/st25/system_utilities/cat.xsm
+load --exec $HOME/myexpos/expl/expl_progs/st25/system_utilities/rm.xsm
+load --exec $HOME/myexpos/expl/expl_progs/st25/system_utilities/cp.xsm
 exit
