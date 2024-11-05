@@ -1,0 +1,28 @@
+int main()
+{
+    decl
+        int a,b;
+        str username,password;
+    enddecl
+    begin
+        while(1==1) do
+            write("Username:");
+            read(username);
+            write("Password:");
+            read(password);
+            a=exposcall("Login",username,password);
+            if(a==-1) then
+                write("Inv cred");
+            endif;
+            if(a==-2) then
+                write("Perm denied");
+            endif;
+            if(a==0) then
+                write("Login success");
+            endif;
+        endwhile; 
+        
+
+        return 0;
+    end
+}
