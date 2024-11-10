@@ -1,57 +1,62 @@
-//Exception
-loadi(2,15);
-loadi(3,16);
-//TIMER
-loadi(4,17);
-loadi(5,18);
-//disk interrupt int 2
-loadi(6,19);
-loadi(7,20);
-//console interrupt handler int 3
-loadi(8,21);
-loadi(9,22);
-//INT 4
-loadi(10,23);
-loadi(11,24);
-//INT 5
-loadi(12,25);
-loadi(13,26);
-//INT 6
-loadi(14,27);
-loadi(15,28);
-//INT 7
-loadi(16,29);
-loadi(17,30);
-//INT 8
-loadi(18,31);
-loadi(19,32);
-//INT 9
-loadi(20,33);
-loadi(21,34);
-//INT 10
-loadi(22,35);
-loadi(23,36);
-//INT 11
-loadi(24,37);
-loadi(25,38);
-//INT 12
-loadi(26,39);
-loadi(27,40);
-//INT 13
-loadi(28,41);
-loadi(29,42);
-//INT 14
-loadi(30,43);
-loadi(31,44);
-//INT 15
-loadi(32,45);
-loadi(33,46);
-//INT 16
-loadi(34,47);
-loadi(35,48);
-//INT 17
-loadi(36,49);
-loadi(37,50);
+// //Exception
+// loadi(2,15);
+// loadi(3,16);
+// //TIMER
+// loadi(4,17);
+// loadi(5,18);
+// //disk interrupt int 2
+// loadi(6,19);
+// loadi(7,20);
+// //console interrupt handler int 3
+// loadi(8,21);
+// loadi(9,22);
+// //INT 4
+// loadi(10,23);
+// loadi(11,24);
+// //INT 5
+// loadi(12,25);
+// loadi(13,26);
+// //INT 6
+// loadi(14,27);
+// loadi(15,28);
+// //INT 7
+// loadi(16,29);
+// loadi(17,30);
+// //INT 8
+// loadi(18,31);
+// loadi(19,32);
+// //INT 9
+// loadi(20,33);
+// loadi(21,34);
+// //INT 10
+// loadi(22,35);
+// loadi(23,36);
+// //INT 11
+// loadi(24,37);
+// loadi(25,38);
+// //INT 12
+// loadi(26,39);
+// loadi(27,40);
+// //INT 13
+// loadi(28,41);
+// loadi(29,42);
+// //INT 14
+// loadi(30,43);
+// loadi(31,44);
+// //INT 15
+// loadi(32,45);
+// loadi(33,46);
+// //INT 16
+// loadi(34,47);
+// loadi(35,48);
+// //INT 17
+// loadi(36,49);
+// loadi(37,50);
+R1 = 2;
+while(R1<=37) do
+	loadi(R1, 13+R1);
+	R1 = R1+1;
+endwhile;
 //mod 0
 loadi(40,53);
 loadi(41,54);
