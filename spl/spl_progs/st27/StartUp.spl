@@ -90,7 +90,7 @@ R1 = PAGE_TABLE_BASE + 15*20;
 [R1+19] = "0000";
 
 //Process TABLE
-R1 = PROCEESS_TABLE + 15*16;
+R1 = PROCESS_TABLE + 15*16;
 [R1 + 0] = 0;       //tick
 [R1 + 1] = 15;      //PID
 [R1 + 3] = 0;       //USERID
