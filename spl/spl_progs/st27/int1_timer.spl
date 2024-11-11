@@ -80,8 +80,8 @@ R1 = SHELL_PROCESS + 1; //start from 3rd process
 while(R1 < MAX_PROC_NUM-1) do
     if([PROCESS_TABLE + R1*16 + 4] != TERMINATED) then
         [PROCESS_TABLE + R1*16] = [PROCESS_TABLE + R1*16] + 1;
-        R1 = R1 + 1;
     endif;
+    R1 = R1 + 1;
 endwhile;
 
 

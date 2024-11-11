@@ -91,15 +91,15 @@ R1 = PAGE_TABLE_BASE + 15*20;
 
 //Process TABLE
 R1 = PROCESS_TABLE + 15*16;
-[R1 + 0] = 0;       //tick
-[R1 + 1] = 15;      //PID
-[R1 + 3] = 0;       //USERID
-[R1 + 4] = CREATED; //STATE
-[R1 + 11] = 82;     //user area page
-[R1 + 12] = 0;      //KPTR
-[R1 + 13] = 8*512;  //UPTR
-[R1 + 14] = R1;     //PTBR
-[R1 + 15] = 10;     //PTLR
+[R1 + 0] = 0;                           //tick
+[R1 + 1] = 15;                          //PID
+[R1 + 3] = 0;                           //USERID
+[R1 + 4] = CREATED;                     //STATE
+[R1 + 11] = 82;                         //user area page
+[R1 + 12] = 0;                          //KPTR
+[R1 + 13] = 8*512;                      //UPTR
+[R1 + 14] = PAGE_TABLE_BASE + 15*20;    //PTBR
+[R1 + 15] = 10;                         //PTLR
 
 //Store IP
 [81*512] = [69*512 + 1];
@@ -108,7 +108,7 @@ PTBR = PAGE_TABLE_BASE;
 PTLR = 10;
 [SYSTEM_STATUS_TABLE + 1] =  0; //PID of currentprocess
 
-
+breakpoint;
 SP =  8*512;
 ireturn;
 

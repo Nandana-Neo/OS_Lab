@@ -28,7 +28,7 @@ else
 	newPID=currentPID+1;
 	newPID = newPID%16;
 	while(newPID != currentPID) do
-		if(newPID!=0 && newPID != SWAPPER_DAEMON) then
+		if(newPID!=0 && newPID != SWAPPER_DAEMON && [PROCESS_TABLE + newPID*16 + 6]==0) then
 			if([PROCESS_TABLE + newPID*16 + 4]==READY)  then
 				break;
 			endif;

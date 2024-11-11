@@ -40,6 +40,7 @@ load --exec $HOME/myexpos/expl/expl_progs/st25/system_utilities/cp.xsm
 load --exec $HOME/myexpos/expl/expl_progs/st25/system_utilities/lu.xsm
 load --exec $HOME/myexpos/expl/expl_progs/st25/system_utilities/ru.xsm
 load --exec $HOME/myexpos/expl/expl_progs/st21/pid.xsm
-load --exec $HOME/myexpos/expl/expl_progs/st27/a1.xsm
-load --exec $HOME/myexpos/expl/expl_progs/st27/a1_r.xsm
+load --exec $HOME/myexpos/expl/expl_progs/st27/a1_3.xsm
+load --exec $HOME/myexpos/expl/expl_progs/st27/a1_4.xsm
+load --exec $HOME/myexpos/expl/expl_progs/st27/a2_d.xsm
 exit

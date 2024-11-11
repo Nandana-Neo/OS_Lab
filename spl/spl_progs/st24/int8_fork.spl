@@ -18,12 +18,13 @@ multipop(R2,R7);
 //returns index of child
 alias childPID R3;
 R3=R0;
+breakpoint;
 
 //Get Pcb Entry returns -1
 if(childPID==-1) then
     //store -1 as the return value in the stack,
     R1 = userSP -1; //user stack address to be written into(virtual address)
-    [[PAGE_TABLE_BASE + 20*[SYSTEM_STATUS_TABLE+1] + (R1/512)*2]*512 + (R1%512)] = -1;
+    [[[R7+14] + (R1/512)*2]*512 + (R1%512)] = -1;
     // reset the MODE FLAG (to 0), 
     [PROCESS_TABLE+[SYSTEM_STATUS_TABLE+1]*16+9]=0;
     //switch to user stack and 

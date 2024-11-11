@@ -18,7 +18,7 @@ multipop(R2,R7);
 //returns index of child
 alias childPID R3;
 R3=R0;
-
+breakpoint;
 //Get Pcb Entry returns -1
 if(childPID==-1) then
     //store -1 as the return value in the stack,
