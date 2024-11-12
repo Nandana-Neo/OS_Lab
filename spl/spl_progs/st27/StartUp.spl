@@ -108,7 +108,7 @@ PTBR = PAGE_TABLE_BASE;
 PTLR = 10;
 [SYSTEM_STATUS_TABLE + 1] =  0; //PID of currentprocess
 
-breakpoint;
+// breakpoint;
 SP =  8*512;
 ireturn;
 

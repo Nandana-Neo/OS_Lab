@@ -88,7 +88,7 @@ endif;
 
 //delete - 4
 if(syscall_no == INT_DELETE) then
-    breakpoint;
+    // breakpoint;
     //find indexof file in  inode table
     alias inode_table_i R5;
     inode_table_i = 0;

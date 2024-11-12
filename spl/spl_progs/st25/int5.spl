@@ -124,8 +124,8 @@ if(syscall == INT_CLOSE) then
     multipop(R1,R2,R3,R4,R5,R6,R7);
 
     // Invalidate the Per-Process Resource Table entry.
-    [pprt] = -1;
-    [pprt+1] = -1;
+    [pprt + file_desc_pprt*2] = -1;
+    [pprt + file_desc_pprt*2 + 1] = -1;
 
     // Set the MODE_FLAG in the process table entry to 0.
     [pcb+9] =0 ;

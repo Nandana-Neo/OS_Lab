@@ -30,7 +30,6 @@ load --init $HOME/myexpos/expl/expl_progs/st26/login.xsm
 load --shell $HOME/myexpos/expl/expl_progs/st26/shell.xsm
 load --os $HOME/myexpos/spl/spl_progs/st27/StartUp.xsm
 load --exec $HOME/myexpos/expl/expl_progs/st23/filec.xsm
-load --exec $HOME/myexpos/expl/expl_progs/st24/read.xsm
 load --data $HOME/myexpos/expl/expl_progs/st24/sample.dat
 load --data $HOME/myexpos/expl/expl_progs/st24/numbers.dat
 load --exec $HOME/myexpos/expl/expl_progs/st25/system_utilities/ls.xsm
