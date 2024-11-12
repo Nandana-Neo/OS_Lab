@@ -43,7 +43,9 @@ if(EPN >=4 && EPN<8) then //code
     multipush(R0,R1,R2,R3);
     R2=[DISK_MAP_TABLE+[SYSTEM_STATUS_TABLE+1]*10+EPN];
     R1=5;
+    multipush(EPN);
     call MOD_2; //Get code pg fn from Memory manager
+    multipop(EPN);
     [PAGE_TABLE_BASE+[SYSTEM_STATUS_TABLE+1]*20+(EPN)*2+0]=R0;
     [PAGE_TABLE_BASE+[SYSTEM_STATUS_TABLE+1]*20+(EPN)*2+1]="1100";
     multipop(R0,R1,R2,R3);
