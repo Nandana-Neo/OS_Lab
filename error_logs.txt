@@ -1,0 +1,9 @@
+1) Stage 6 -- Jump address issue
+2) Stage 10 -- comments
+3) Stage 11_Assg3 -- xsm code at the end of file should be new line
+4) Stage 18 -- Printing odd no. but coming even! 
+            -- Solved:  multipush and multipop issues when calling modules -- 2nd time!!
+5) Stage 19 -- A whole bunch of errors
+6) Stage 20 -- int10 -- If u r not ending a spl file with return ot ireturn, then ensure there is a blank line at the end
+7) Stage 22 -- int8 --  disk map table
+-- expl won't identify '_' for variable  names

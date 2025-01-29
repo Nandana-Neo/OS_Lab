@@ -88,6 +88,7 @@ if(fnno == SWAP_OUT) then
 
             // Store the disk block number in the Disk Map Table entry of the process curresponding to the heap page.
             [R6+(R7/2)] = R0;
+            
             // Use the disk_store() function in the Device Manager module to write the heap page to the block found above
             multipush(R1,R2,R3,R4,R5,R6,R7);
             R1 = DISK_STORE;
